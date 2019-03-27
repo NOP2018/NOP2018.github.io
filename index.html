@@ -181,28 +181,14 @@
 <li>开放数据源</li>
 <li>爬虫抓取</li>
 <li>日志采集，包括前端采集，后端脚本</li>
-<li>传感器，如图像等</li>
-</ol>
-<h2 id="如何使用开放数据源"><a href="#如何使用开放数据源" class="headerlink" title="如何使用开放数据源"></a>如何使用开放数据源</h2><p>可以从两个维度考虑，一是单位的维度，如政府、企业、高校等；另一个是行业维度，如交通、金融、能源等领域。<br>也就是，搜索政府企业的公开数据，各种网站如Google，Facebook等，以及一些比赛平台的公开数据，如kaggle，天池等。</p>
-<h2 id="如何使用爬虫抓取"><a href="#如何使用爬虫抓取" class="headerlink" title="如何使用爬虫抓取"></a>如何使用爬虫抓取</h2><p>自己写 python 爬虫时，一般会经历三个过程：</p>
-<ol>
-<li>使用 requests 爬取内容</li>
-<li>使用 Xpath 解析内容。Xpath 也就是XML路径语言。</li>
-<li>使用 pandas 保存数据</li>
-</ol>
-<p>或者可以直接使用现有爬虫框架甚至爬虫软件。爬虫框架可以使用scrapy ，软件可以使用八爪鱼，后续详细介绍使用。</p>
-<h2 id="如何使用日志采集工具"><a href="#如何使用日志采集工具" class="headerlink" title="如何使用日志采集工具"></a>如何使用日志采集工具</h2><p>日志采集最重要的作用就是，通过分析用户访问情况，提升系统的性能和承载量。<br>日志记录了用户访问网站的全过程：谁，在什么时间，通过什么方式访问，执行了哪些操作，系统是否产生了错误，用户的ip、http请求的时间等。<br>日志采集包括两种形式：</p>
-<ol>
-<li>通过web服务器采集，例如 httpd、Nginx、Tomcat 都带有日志记录功能。</li>
-<li>自定义采集用户行为，例如通过js代码监听用户行为等。</li>
-</ol>
-<h3 id="埋点是什么"><a href="#埋点是什么" class="headerlink" title="埋点是什么"></a>埋点是什么</h3><p>埋点是日志采集的关键步骤。<strong>埋点是在有需要的位置采集相应的信息，进行上报。</strong><br>埋点就是在你需要统计数据的地方植入统计代码，植入代码可以自己写，也可以使用第三方统计工具，如友盟、Google analysis、talkindata 等。他们都是采用前端埋点的方式，然后在第三方工具里能看到用户的行为数据。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总之获取数据的方式很多，多尝试。</p>
-
+<li>传感器，如图像等
+        
+          <a class="article-more-a" href="/2019/03/27/数据分析笔记：数据采集/#more">more >></a>
+        
       
 
       
-    </div>
+    </li></ol></div>
     <div class="article-info article-info-index">
       
       
@@ -276,83 +262,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>如何通过 python 编写爬虫抓取数据。</p>
-<h2 id="爬虫的流程"><a href="#爬虫的流程" class="headerlink" title="爬虫的流程"></a>爬虫的流程</h2><p>爬虫实际上是用浏览器访问的方式模拟访问网站的过程，包括打开网页、提取数据和保存数据三个阶段。<br>在打开网页阶段，可以使用 requests 访问页面，得到服务器返回的包括 html 页面和 json 数据。<br>在提取数据阶段，可以用 Xpath 进行元素定位，提取数据，使用 JSON 进行解析。<br>在保存数据阶段，则可以使用 Pandas 导出需要的格式文件如 CSV 等。</p>
-<h3 id="Requests-访问页面"><a href="#Requests-访问页面" class="headerlink" title="Requests 访问页面"></a>Requests 访问页面</h3><p>Requests 有两种访问方式： Get 和 Post。 Get 把参数包含爱URL 中，而 Post 通过 request body 传递参数。<br>比如访问豆瓣，可以写成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(&apos;http://www.douban.com&apos;)</span><br></pre></td></tr></table></figure>
-<p>然后可以使用 r.text 或 r.content 来获得 html 正文。<br>相应的可以使用 requests.post 进行表单传递:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = requests.post(&apos;http://xxx.com&apos;, data = &#123;&apos;key:&apos; &apos;value&apos;&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="Xpath-定位"><a href="#Xpath-定位" class="headerlink" title="Xpath 定位"></a>Xpath 定位</h3><p>Xpath 通过元素和属性进行导航，帮我们定位位置，它有常见的几种路径表达方式：</p>
-<table>
-<thead>
-<tr>
-<th>表达式</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>node</td>
-<td>选node节点的所有子节点</td>
-</tr>
-<tr>
-<td>/</td>
-<td>从根节点选取</td>
-</tr>
-<tr>
-<td>//</td>
-<td>选取所有的当前节点，不考虑他们的位置</td>
-</tr>
-<tr>
-<td>.</td>
-<td>当前节点</td>
-</tr>
-<tr>
-<td>..</td>
-<td>父节点</td>
-</tr>
-<tr>
-<td>@</td>
-<td>属性选择</td>
-</tr>
-<tr>
-<td>或字符</td>
-<td>或，两个节点的合计</td>
-</tr>
-<tr>
-<td>text()</td>
-<td>当前路径下的文本内容</td>
-</tr>
-</tbody>
-</table>
-<p>使用 Xpath 定位，会用到python 的一个解析库 lxml。比如定位到 html 中的所有列表项目，可以写成：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">html = etree.HTML(html)</span><br><span class="line">result = html.xpath(‘//li’)</span><br></pre></td></tr></table></figure>
-<h3 id="JSON-对象"><a href="#JSON-对象" class="headerlink" title="JSON 对象"></a>JSON 对象</h3><p>JSON 是一种轻量级的交互方式，python 中有json 库可以将两者进行转换，方便解析。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>json.dumps()</td>
-<td>将python对象转换成json 对象</td>
-</tr>
-<tr>
-<td>json.loads()</td>
-<td>将json 对象转换成python对象</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Selenium-库"><a href="#Selenium-库" class="headerlink" title="Selenium 库"></a>Selenium 库</h2><p>有时候直接使用 Requests 获取 html 的时候，发现想要的 Xpath 不存在，这是因为网页还没加载完。我们需要一个工具来进行网页加载的模拟，直到加载完整。<br>Selenium 库是一个 Web 应用的测试工具，可以直接运行在浏览器中，原理是模拟用户在进行操作，支持主流浏览器。以 Chrome 为例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(request_url)</span><br></pre></td></tr></table></figure>
-<h2 id="实战：抓取图片"><a href="#实战：抓取图片" class="headerlink" title="实战：抓取图片"></a>实战：抓取图片</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="/images/da-spider1.png" alt></p>
-
+<h2 id="爬虫的流程"><a href="#爬虫的流程" class="headerlink" title="爬虫的流程"></a>爬虫的流程</h2><p>爬虫实际上是用浏览器访问的方式模拟访问网站的过程，包括打开网页、提取数据和保存数据三个阶段。<br>在打开网页阶段，可以使用 requests 访问页面，得到服务器返回的包括 html 页面和 json 数据。<br>在提取数据阶段，可以用 Xpath 进行元素定位，提取数据，使用 JSON 进行解析。<br>在保存数据阶段，则可以使用 Pandas 导出需要的格式文件如 CSV 等。<br>
+        
+          <a class="article-more-a" href="/2019/03/26/数据分析笔记：爬虫/#more">more >></a>
+        
       
 
       
-    </div>
+    </p></div>
     <div class="article-info article-info-index">
       
       
@@ -430,12 +347,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。<br>似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。</p>
-<h2 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a>笔试</h2><p>一个大题，两个小题。大题是多表查询并创建新表，题目大意是根据客户在商户扫码和购买礼品卡的时间差，统计商户推广礼品卡的绩效，提供了giftcard，scan，和store三个表。思路是以store为关键表查询，用join语句查询其他两个表，使用的MySQL。用timestampdiff函数计算时间差（因为表中时间格式是timestamp，根据情况不同可以使用其他diff函数如datediff等）。大致解答如下图：<br><img src="/images/bishi1ans.png" alt><br>后面面试过程中会问到思路，join的用法，inner join， left join， 和right join的区别，以前根据这道题的实际情况选择用什么join比较合理。因为我用的是inner join，实际可能存在有商户没有任何礼品卡推广的情况，也就是在giftcard, scan表中的记录为null，所以使用left join更合理些。</p>
-<p>两个小题，和leetcode上的题目很像。其中一个是用一条了sql余韵查询所有课程分数都大于80分的学生名字。<br><img src="/images/bishi2.png" alt><br>主要考察对题目的理解，也就是所有课程大于80分，那就可以使用最小值函数查询。<br>select name from _ group by name having min(score)&gt;80;</p>
-<p>另一个题目，是竖表查成横表。<br><img src="/images/bishi3.png" alt><br>查成这样的：<br><img src="/images/bishi33.png" alt><br>考察mysql的case when语句，解答：<br><img src="/images/bishi3ans.png" alt></p>
-<h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><p>写第一题花了比较多时间，导致后面两题还没来得及做面试官就回来了，开始问思路，很惭愧，两个小题都没能回答好，但是面试官还比较有耐心，也很友好的提醒了我。<br>SQL方面就是这些，然后就开始正式面试，无非就是自我介绍，讲解项目等，由于我是转行的，所以项目这边能讲的就不多。然后问到一点python，主要是pandas中df的一些用法，面试官自己临时想了个题，可能觉得没出好，就作罢。<br>最后就是问为什么离职，为什么选择转行云云，也直接说了转行其实很难的，总之人挺好的。<br>最后的最后考察了一下分析的能力吧，问如果公司未作什么措施而股价却突然上涨的话，我会从哪些方面去分析。我的回答是政策形势，相关行业情况等，好像不太满意，说这些不好量化，也不好统计。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总体来看，还是一次比较愉快的面试，沟通比较顺利，回答不出的时候也不至于尴尬。准备时间多点的话可能情况会好一些，sql方面确实是比较薄弱的，还是要多刷题，以及最后一问应该询问正确做法的。<br>最后结果是没能通过，有一点点可惜吧。</p>
-
+        
+          <a class="article-more-a" href="/2019/03/14/面试记录——微众银行数据分析/#more">more >></a>
+        
       
 
       
@@ -448,11 +362,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -723,15 +637,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -744,6 +650,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">xpath</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
             
             <div class="clearfix"></div>

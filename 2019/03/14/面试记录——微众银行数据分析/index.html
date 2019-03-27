@@ -8,23 +8,23 @@
   <link rel="dns-prefetch" href="//gongls.me">
   <title>面试记录——微众银行数据分析 | Gongls</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。 笔试一个大题，两个小题。大题是多表查询并创建新表，题目大意是根据客户在商户扫码和购买礼品卡的时间差，统计商户推广礼品卡的绩效，提供了giftcard，scan，和store三个表。思路是以">
-<meta name="keywords" content="面试,数据分析,SQL">
+  <meta name="description" content="其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。">
+<meta name="keywords" content="数据分析,面试,SQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试记录——微众银行数据分析">
 <meta property="og:url" content="//gongls.me/2019/03/14/面试记录——微众银行数据分析/index.html">
 <meta property="og:site_name" content="Gongls">
-<meta property="og:description" content="其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。 笔试一个大题，两个小题。大题是多表查询并创建新表，题目大意是根据客户在商户扫码和购买礼品卡的时间差，统计商户推广礼品卡的绩效，提供了giftcard，scan，和store三个表。思路是以">
+<meta property="og:description" content="其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="//gongls.me/images/bishi1ans.png">
 <meta property="og:image" content="//gongls.me/images/bishi2.png">
 <meta property="og:image" content="//gongls.me/images/bishi3.png">
 <meta property="og:image" content="//gongls.me/images/bishi33.png">
 <meta property="og:image" content="//gongls.me/images/bishi3ans.png">
-<meta property="og:updated_time" content="2019-03-15T09:40:26.160Z">
+<meta property="og:updated_time" content="2019-03-27T05:52:59.606Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试记录——微众银行数据分析">
-<meta name="twitter:description" content="其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。 笔试一个大题，两个小题。大题是多表查询并创建新表，题目大意是根据客户在商户扫码和购买礼品卡的时间差，统计商户推广礼品卡的绩效，提供了giftcard，scan，和store三个表。思路是以">
+<meta name="twitter:description" content="其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。">
 <meta name="twitter:image" content="//gongls.me/images/bishi1ans.png">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
@@ -182,6 +182,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。<br>似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。</p>
+<a id="more"></a>
 <h2 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a>笔试</h2><p>一个大题，两个小题。大题是多表查询并创建新表，题目大意是根据客户在商户扫码和购买礼品卡的时间差，统计商户推广礼品卡的绩效，提供了giftcard，scan，和store三个表。思路是以store为关键表查询，用join语句查询其他两个表，使用的MySQL。用timestampdiff函数计算时间差（因为表中时间格式是timestamp，根据情况不同可以使用其他diff函数如datediff等）。大致解答如下图：<br><img src="/images/bishi1ans.png" alt><br>后面面试过程中会问到思路，join的用法，inner join， left join， 和right join的区别，以前根据这道题的实际情况选择用什么join比较合理。因为我用的是inner join，实际可能存在有商户没有任何礼品卡推广的情况，也就是在giftcard, scan表中的记录为null，所以使用left join更合理些。</p>
 <p>两个小题，和leetcode上的题目很像。其中一个是用一条了sql余韵查询所有课程分数都大于80分的学生名字。<br><img src="/images/bishi2.png" alt><br>主要考察对题目的理解，也就是所有课程大于80分，那就可以使用最小值函数查询。<br>select name from _ group by name having min(score)&gt;80;</p>
 <p>另一个题目，是竖表查成横表。<br><img src="/images/bishi3.png" alt><br>查成这样的：<br><img src="/images/bishi33.png" alt><br>考察mysql的case when语句，解答：<br><img src="/images/bishi3ans.png" alt></p>
@@ -221,11 +222,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -436,15 +437,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -457,6 +450,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">xpath</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
             
             <div class="clearfix"></div>

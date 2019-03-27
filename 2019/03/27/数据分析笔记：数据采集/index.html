@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="//gongls.me">
   <title>数据分析笔记：数据采集 | Gongls</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等  如何使用开放数据源可以从两个维度考虑，一是单位的维度，如政府、企业、高校等；另一个是行业维度，如交通、金融、能源等领域。也就是，搜索政府企业的公开数据，各种网站如Google，Facebook等，以及一些比赛平台的公开数据，如">
+  <meta name="description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等">
 <meta name="keywords" content="数据分析,数据采集">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据分析笔记：数据采集">
 <meta property="og:url" content="//gongls.me/2019/03/27/数据分析笔记：数据采集/index.html">
 <meta property="og:site_name" content="Gongls">
-<meta property="og:description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等  如何使用开放数据源可以从两个维度考虑，一是单位的维度，如政府、企业、高校等；另一个是行业维度，如交通、金融、能源等领域。也就是，搜索政府企业的公开数据，各种网站如Google，Facebook等，以及一些比赛平台的公开数据，如">
+<meta property="og:description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-27T04:07:54.693Z">
+<meta property="og:updated_time" content="2019-03-27T05:53:51.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据分析笔记：数据采集">
-<meta name="twitter:description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等  如何使用开放数据源可以从两个维度考虑，一是单位的维度，如政府、企业、高校等；另一个是行业维度，如交通、金融、能源等领域。也就是，搜索政府企业的公开数据，各种网站如Google，Facebook等，以及一些比赛平台的公开数据，如">
+<meta name="twitter:description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -180,11 +180,8 @@
 <li>开放数据源</li>
 <li>爬虫抓取</li>
 <li>日志采集，包括前端采集，后端脚本</li>
-<li>传感器，如图像等</li>
-</ol>
-<h2 id="如何使用开放数据源"><a href="#如何使用开放数据源" class="headerlink" title="如何使用开放数据源"></a>如何使用开放数据源</h2><p>可以从两个维度考虑，一是单位的维度，如政府、企业、高校等；另一个是行业维度，如交通、金融、能源等领域。<br>也就是，搜索政府企业的公开数据，各种网站如Google，Facebook等，以及一些比赛平台的公开数据，如kaggle，天池等。</p>
-<h2 id="如何使用爬虫抓取"><a href="#如何使用爬虫抓取" class="headerlink" title="如何使用爬虫抓取"></a>如何使用爬虫抓取</h2><p>自己写 python 爬虫时，一般会经历三个过程：</p>
-<ol>
+<li>传感器，如图像等<a id="more"></a>
+<h2 id="如何使用开放数据源"><a href="#如何使用开放数据源" class="headerlink" title="如何使用开放数据源"></a>如何使用开放数据源</h2>可以从两个维度考虑，一是单位的维度，如政府、企业、高校等；另一个是行业维度，如交通、金融、能源等领域。<br>也就是，搜索政府企业的公开数据，各种网站如Google，Facebook等，以及一些比赛平台的公开数据，如kaggle，天池等。<h2 id="如何使用爬虫抓取"><a href="#如何使用爬虫抓取" class="headerlink" title="如何使用爬虫抓取"></a>如何使用爬虫抓取</h2>自己写 python 爬虫时，一般会经历三个过程：</li>
 <li>使用 requests 爬取内容</li>
 <li>使用 Xpath 解析内容。Xpath 也就是XML路径语言。</li>
 <li>使用 pandas 保存数据</li>
@@ -433,15 +430,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -454,6 +443,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">xpath</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
             
             <div class="clearfix"></div>
