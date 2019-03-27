@@ -156,6 +156,105 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-数据分析笔记：数据采集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/27/数据分析笔记：数据采集/">数据分析笔记：数据采集</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/27/数据分析笔记：数据采集/" class="archive-article-date">
+  	<time datetime="2019-03-27T04:06:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>需要通过<strong>多源的数据采集</strong>，收集到尽可能多的数据维度，同时保证数据的质量。<br>数据源可以分为以下四类：</p>
+<ol>
+<li>开放数据源</li>
+<li>爬虫抓取</li>
+<li>日志采集，包括前端采集，后端脚本</li>
+<li>传感器，如图像等</li>
+</ol>
+<h2 id="如何使用开放数据源"><a href="#如何使用开放数据源" class="headerlink" title="如何使用开放数据源"></a>如何使用开放数据源</h2><p>可以从两个维度考虑，一是单位的维度，如政府、企业、高校等；另一个是行业维度，如交通、金融、能源等领域。<br>也就是，搜索政府企业的公开数据，各种网站如Google，Facebook等，以及一些比赛平台的公开数据，如kaggle，天池等。</p>
+<h2 id="如何使用爬虫抓取"><a href="#如何使用爬虫抓取" class="headerlink" title="如何使用爬虫抓取"></a>如何使用爬虫抓取</h2><p>自己写 python 爬虫时，一般会经历三个过程：</p>
+<ol>
+<li>使用 requests 爬取内容</li>
+<li>使用 Xpath 解析内容。Xpath 也就是XML路径语言。</li>
+<li>使用 pandas 保存数据</li>
+</ol>
+<p>或者可以直接使用现有爬虫框架甚至爬虫软件。爬虫框架可以使用scrapy ，软件可以使用八爪鱼，后续详细介绍使用。</p>
+<h2 id="如何使用日志采集工具"><a href="#如何使用日志采集工具" class="headerlink" title="如何使用日志采集工具"></a>如何使用日志采集工具</h2><p>日志采集最重要的作用就是，通过分析用户访问情况，提升系统的性能和承载量。<br>日志记录了用户访问网站的全过程：谁，在什么时间，通过什么方式访问，执行了哪些操作，系统是否产生了错误，用户的ip、http请求的时间等。<br>日志采集包括两种形式：</p>
+<ol>
+<li>通过web服务器采集，例如 httpd、Nginx、Tomcat 都带有日志记录功能。</li>
+<li>自定义采集用户行为，例如通过js代码监听用户行为等。</li>
+</ol>
+<h3 id="埋点是什么"><a href="#埋点是什么" class="headerlink" title="埋点是什么"></a>埋点是什么</h3><p>埋点是日志采集的关键步骤。<strong>埋点是在有需要的位置采集相应的信息，进行上报。</strong><br>埋点就是在你需要统计数据的地方植入统计代码，植入代码可以自己写，也可以使用第三方统计工具，如友盟、Google analysis、talkindata 等。他们都是采用前端埋点的方式，然后在第三方工具里能看到用户的行为数据。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总之获取数据的方式很多，多尝试。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据采集</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/27/数据分析笔记：数据采集/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-数据分析笔记：爬虫" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -262,11 +361,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -624,11 +723,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据分析</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据分析</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据采集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
