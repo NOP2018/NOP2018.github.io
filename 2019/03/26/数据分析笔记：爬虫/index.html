@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="Gongls">
 <meta property="og:description" content="如何通过 python 编写爬虫抓取数据。 爬虫的流程爬虫实际上是用浏览器访问的方式模拟访问网站的过程，包括打开网页、提取数据和保存数据三个阶段。在打开网页阶段，可以使用 requests 访问页面，得到服务器返回的包括 html 页面和 json 数据。在提取数据阶段，可以用 Xpath 进行元素定位，提取数据，使用 JSON 进行解析。在保存数据阶段，则可以使用 Pandas 导出需要的格式文">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="//gongls.me/2019/03/26/数据分析笔记：爬虫/15535911800615.jpg">
-<meta property="og:updated_time" content="2019-03-27T03:48:45.459Z">
+<meta property="og:image" content="//gongls.me/images/da-spider1.png">
+<meta property="og:updated_time" content="2019-03-27T03:54:29.833Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据分析笔记：爬虫">
 <meta name="twitter:description" content="如何通过 python 编写爬虫抓取数据。 爬虫的流程爬虫实际上是用浏览器访问的方式模拟访问网站的过程，包括打开网页、提取数据和保存数据三个阶段。在打开网页阶段，可以使用 requests 访问页面，得到服务器返回的包括 html 页面和 json 数据。在提取数据阶段，可以用 Xpath 进行元素定位，提取数据，使用 JSON 进行解析。在保存数据阶段，则可以使用 Pandas 导出需要的格式文">
-<meta name="twitter:image" content="//gongls.me/2019/03/26/数据分析笔记：爬虫/15535911800615.jpg">
+<meta name="twitter:image" content="//gongls.me/images/da-spider1.png">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -217,8 +217,8 @@
 <td>属性选择</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>‘</td>
+<td>‘</td>
 <td>或，两个节点的合计</td>
 </tr>
 <tr>
@@ -250,7 +250,7 @@
 </table>
 <h2 id="Selenium-库"><a href="#Selenium-库" class="headerlink" title="Selenium 库"></a>Selenium 库</h2><p>有时候直接使用 Requests 获取 html 的时候，发现想要的 Xpath 不存在，这是因为网页还没加载完。我们需要一个工具来进行网页加载的模拟，直到加载完整。<br>Selenium 库是一个 Web 应用的测试工具，可以直接运行在浏览器中，原理是模拟用户在进行操作，支持主流浏览器。以 Chrome 为例：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(request_url)</span><br></pre></td></tr></table></figure>
-<h2 id="实战：抓取图片"><a href="#实战：抓取图片" class="headerlink" title="实战：抓取图片"></a>实战：抓取图片</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="15535911800615.jpg" alt></p>
+<h2 id="实战：抓取图片"><a href="#实战：抓取图片" class="headerlink" title="实战：抓取图片"></a>实战：抓取图片</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="/images/da-spider1.png" alt></p>
 
       
 
@@ -362,15 +362,6 @@
 
   
 <nav id="article-nav">
-  
-    <a href="/2019/03/26/DA-02-1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据分析笔记：爬虫
-        
-      </div>
-    </a>
   
   
     <a href="/2019/03/14/面试记录——微众银行数据分析/" id="article-nav-older" class="article-nav-link-wrap">
