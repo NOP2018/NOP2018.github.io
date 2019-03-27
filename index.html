@@ -159,9 +159,179 @@
     <article id="post-DA-02-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/26/DA-02-1/">数据分析笔记：爬虫</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/26/DA-02-1/" class="archive-article-date">
+  	<time datetime="2019-03-26T09:19:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-26</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="数据分析笔记：爬虫"><a href="#数据分析笔记：爬虫" class="headerlink" title="数据分析笔记：爬虫"></a>数据分析笔记：爬虫</h1><p>如何通过 python 编写爬虫抓取数据。</p>
+        <p>如何通过 python 编写爬虫抓取数据。</p>
+<h2 id="爬虫的流程"><a href="#爬虫的流程" class="headerlink" title="爬虫的流程"></a>爬虫的流程</h2><p>爬虫实际上是用浏览器访问的方式模拟访问网站的过程，包括打开网页、提取数据和保存数据三个阶段。<br>在打开网页阶段，可以使用 requests 访问页面，得到服务器返回的包括 html 页面和 json 数据。<br>在提取数据阶段，可以用 Xpath 进行元素定位，提取数据，使用 JSON 进行解析。<br>在保存数据阶段，则可以使用 Pandas 导出需要的格式文件如 CSV 等。</p>
+<h3 id="Requests-访问页面"><a href="#Requests-访问页面" class="headerlink" title="Requests 访问页面"></a>Requests 访问页面</h3><p>Requests 有两种访问方式： Get 和 Post。 Get 把参数包含爱URL 中，而 Post 通过 request body 传递参数。<br>比如访问豆瓣，可以写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(&apos;http://www.douban.com&apos;)</span><br></pre></td></tr></table></figure>
+<p>然后可以使用 r.text 或 r.content 来获得 html 正文。<br>相应的可以使用 requests.post 进行表单传递:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = requests.post(&apos;http://xxx.com&apos;, data = &#123;&apos;key:&apos; &apos;value&apos;&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Xpath-定位"><a href="#Xpath-定位" class="headerlink" title="Xpath 定位"></a>Xpath 定位</h3><p>Xpath 通过元素和属性进行导航，帮我们定位位置，它有常见的几种路径表达方式：</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node</td>
+<td>选node节点的所有子节点</td>
+</tr>
+<tr>
+<td>/</td>
+<td>从根节点选取</td>
+</tr>
+<tr>
+<td>//</td>
+<td>选取所有的当前节点，不考虑他们的位置</td>
+</tr>
+<tr>
+<td>.</td>
+<td>当前节点</td>
+</tr>
+<tr>
+<td>..</td>
+<td>父节点</td>
+</tr>
+<tr>
+<td>@</td>
+<td>属性选择</td>
+</tr>
+<tr>
+<td>‘</td>
+<td>‘</td>
+<td>或，两个节点的合计</td>
+</tr>
+<tr>
+<td>text()</td>
+<td>当前路径下的文本内容</td>
+</tr>
+</tbody>
+</table>
+<p>使用 Xpath 定位，会用到python 的一个解析库 lxml。比如定位到 html 中的所有列表项目，可以写成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">html = etree.HTML(html)</span><br><span class="line">result = html.xpath(‘//li’)</span><br></pre></td></tr></table></figure>
+<h3 id="JSON-对象"><a href="#JSON-对象" class="headerlink" title="JSON 对象"></a>JSON 对象</h3><p>JSON 是一种轻量级的交互方式，python 中有json 库可以将两者进行转换，方便解析。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>json.dumps()</td>
+<td>将python对象转换成json 对象</td>
+</tr>
+<tr>
+<td>json.loads()</td>
+<td>将json 对象转换成python对象</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Selenium-库"><a href="#Selenium-库" class="headerlink" title="Selenium 库"></a>Selenium 库</h2><p>有时候直接使用 Requests 获取 html 的时候，发现想要的 Xpath 不存在，这是因为网页还没加载完。我们需要一个工具来进行网页加载的模拟，直到加载完整。<br>Selenium 库是一个 Web 应用的测试工具，可以直接运行在浏览器中，原理是模拟用户在进行操作，支持主流浏览器。以 Chrome 为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(request_url)</span><br></pre></td></tr></table></figure>
+<h2 id="实战：抓取图片"><a href="#实战：抓取图片" class="headerlink" title="实战：抓取图片"></a>实战：抓取图片</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="/images/da-spider1.png" alt></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">xpath</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/26/DA-02-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据分析笔记：爬虫" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/26/数据分析笔记：爬虫/">数据分析笔记：爬虫</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/26/数据分析笔记：爬虫/" class="archive-article-date">
+  	<time datetime="2019-03-26T09:19:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如何通过 python 编写爬虫抓取数据。</p>
 <h2 id="爬虫的流程"><a href="#爬虫的流程" class="headerlink" title="爬虫的流程"></a>爬虫的流程</h2><p>爬虫实际上是用浏览器访问的方式模拟访问网站的过程，包括打开网页、提取数据和保存数据三个阶段。<br>在打开网页阶段，可以使用 requests 访问页面，得到服务器返回的包括 html 页面和 json 数据。<br>在提取数据阶段，可以用 Xpath 进行元素定位，提取数据，使用 JSON 进行解析。<br>在保存数据阶段，则可以使用 Pandas 导出需要的格式文件如 CSV 等。</p>
 <h3 id="Requests-访问页面"><a href="#Requests-访问页面" class="headerlink" title="Requests 访问页面"></a>Requests 访问页面</h3><p>Requests 有两种访问方式： Get 和 Post。 Get 把参数包含爱URL 中，而 Post 通过 request body 传递参数。<br>比如访问豆瓣，可以写成：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(&apos;http://www.douban.com&apos;)</span><br></pre></td></tr></table></figure>
@@ -243,11 +413,30 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">xpath</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/27/DA-02-1/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/03/26/数据分析笔记：爬虫/">展开全文 >></a>
         </p>
       
 
@@ -316,11 +505,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -591,11 +780,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">xpath</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
