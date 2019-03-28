@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//gongls.me">
-  <title>数据分析笔记：数据采集 | Gongls</title>
+  <title>数据分析笔记：数据清洗 | Gongls</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等">
-<meta name="keywords" content="数据分析,数据采集">
+  <meta name="description" content="遇到的各种数据，质量参差不齐，往往不能直接满足挖掘分析需求，这时就需要做一个前期准备工作，也就是数据清洗。数据清洗工作可以使用 python 中的 pandas 工具，pandas 中有大量的库，我们可以用来进行高效的清洗工作。质量高的数据应该具有以下四点特性：  完整性：数据是否存在空值，字段是否完善； 全面性：观察某一列的全部数值，通过常识或统计方法判断该列是否有问题，比如：数据的定义、单位标">
+<meta name="keywords" content="数据分析,数据清洗">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据分析笔记：数据采集">
-<meta property="og:url" content="//gongls.me/2019/03/27/数据分析笔记：数据采集/index.html">
+<meta property="og:title" content="数据分析笔记：数据清洗">
+<meta property="og:url" content="//gongls.me/2019/03/28/数据分析笔记：数据清洗/index.html">
 <meta property="og:site_name" content="Gongls">
-<meta property="og:description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等">
+<meta property="og:description" content="遇到的各种数据，质量参差不齐，往往不能直接满足挖掘分析需求，这时就需要做一个前期准备工作，也就是数据清洗。数据清洗工作可以使用 python 中的 pandas 工具，pandas 中有大量的库，我们可以用来进行高效的清洗工作。质量高的数据应该具有以下四点特性：  完整性：数据是否存在空值，字段是否完善； 全面性：观察某一列的全部数值，通过常识或统计方法判断该列是否有问题，比如：数据的定义、单位标">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-27T05:57:17.509Z">
+<meta property="og:updated_time" content="2019-03-28T09:52:16.226Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据分析笔记：数据采集">
-<meta name="twitter:description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等">
+<meta name="twitter:title" content="数据分析笔记：数据清洗">
+<meta name="twitter:description" content="遇到的各种数据，质量参差不齐，往往不能直接满足挖掘分析需求，这时就需要做一个前期准备工作，也就是数据清洗。数据清洗工作可以使用 python 中的 pandas 工具，pandas 中有大量的库，我们可以用来进行高效的清洗工作。质量高的数据应该具有以下四点特性：  完整性：数据是否存在空值，字段是否完善； 全面性：观察某一列的全部数值，通过常识或统计方法判断该列是否有问题，比如：数据的定义、单位标">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -155,45 +155,57 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-数据分析笔记：数据采集" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-数据分析笔记：数据清洗" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      数据分析笔记：数据采集
+      数据分析笔记：数据清洗
     </h1>
   
 
         
-        <a href="/2019/03/27/数据分析笔记：数据采集/" class="archive-article-date">
-  	<time datetime="2019-03-27T04:06:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-27</time>
+        <a href="/2019/03/28/数据分析笔记：数据清洗/" class="archive-article-date">
+  	<time datetime="2019-03-28T09:07:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>需要通过<strong>多源的数据采集</strong>，收集到尽可能多的数据维度，同时保证数据的质量。<br>数据源可以分为以下四类：</p>
+        <p>遇到的各种数据，质量参差不齐，往往不能直接满足挖掘分析需求，这时就需要做一个前期准备工作，也就是数据清洗。<br>数据清洗工作可以使用 python 中的 pandas 工具，pandas 中有大量的库，我们可以用来进行高效的清洗工作。<br>质量高的数据应该具有以下四点特性：</p>
 <ol>
-<li>开放数据源</li>
-<li>爬虫抓取</li>
-<li>日志采集，包括前端采集，后端脚本</li>
-<li>传感器，如图像等<a id="more"></a>
-<h2 id="如何使用开放数据源"><a href="#如何使用开放数据源" class="headerlink" title="如何使用开放数据源"></a>如何使用开放数据源</h2>可以从两个维度考虑，一是单位的维度，如政府、企业、高校等；另一个是行业维度，如交通、金融、能源等领域。<br>也就是，搜索政府企业的公开数据，各种网站如Google，Facebook等，以及一些比赛平台的公开数据，如kaggle，天池等。<h2 id="如何使用爬虫抓取"><a href="#如何使用爬虫抓取" class="headerlink" title="如何使用爬虫抓取"></a>如何使用爬虫抓取</h2>自己写 python 爬虫时，一般会经历三个过程：</li>
-<li>使用 requests 爬取内容</li>
-<li>使用 Xpath 解析内容。Xpath 也就是XML路径语言。</li>
-<li>使用 pandas 保存数据</li>
+<li>完整性：数据是否存在空值，字段是否完善；</li>
+<li>全面性：观察某一列的全部数值，通过常识或统计方法判断该列是否有问题，比如：数据的定义、单位标识和数据本身等；</li>
+<li>合法性：数据的类型、内容、大小的合法性。比如是否存在非 ASCII 字符，性别存在未知，年龄不科学等；</li>
+<li>唯一性：数据是否存在重复记录。</li>
 </ol>
-<p>或者可以直接使用现有爬虫框架甚至爬虫软件。爬虫框架可以使用scrapy ，软件可以使用八爪鱼，后续详细介绍使用。</p>
-<h2 id="如何使用日志采集工具"><a href="#如何使用日志采集工具" class="headerlink" title="如何使用日志采集工具"></a>如何使用日志采集工具</h2><p>日志采集最重要的作用就是，通过分析用户访问情况，提升系统的性能和承载量。<br>日志记录了用户访问网站的全过程：谁，在什么时间，通过什么方式访问，执行了哪些操作，系统是否产生了错误，用户的ip、http请求的时间等。<br>日志采集包括两种形式：</p>
+<a id="more"></a>
+<h2 id="1-完整性"><a href="#1-完整性" class="headerlink" title="1.完整性"></a>1.完整性</h2><h3 id="缺失值"><a href="#缺失值" class="headerlink" title="缺失值"></a>缺失值</h3><p>缺失值产生的原因可能有：一是该信息暂时无法获取或获取的代价太大；二是人为遗漏或采集设备故障等非人为因素；三是属性不存在。对于缺失值，通常有三种处理方法：</p>
 <ol>
-<li>通过web服务器采集，例如 httpd、Nginx、Tomcat 都带有日志记录功能。</li>
-<li>自定义采集用户行为，例如通过js代码监听用户行为等。</li>
+<li>删除：若缺失值较少，可以直接删除缺失的记录；</li>
+<li>插补：插补方法比较多，包括使用均值/中位数/众数插补，使用最高频，使用最近邻插补，回归方法，插值法等；</li>
+<li>不处理。</li>
 </ol>
-<h3 id="埋点是什么"><a href="#埋点是什么" class="headerlink" title="埋点是什么"></a>埋点是什么</h3><p>埋点是日志采集的关键步骤。<strong>埋点是在有需要的位置采集相应的信息，进行上报。</strong><br>埋点就是在你需要统计数据的地方植入统计代码，植入代码可以自己写，也可以使用第三方统计工具，如友盟、Google analysis、talkindata 等。他们都是采用前端埋点的方式，然后在第三方工具里能看到用户的行为数据。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总之获取数据的方式很多，多尝试。</p>
+<p>以下主要介绍插补的方法。<br>比如对数据age属性中缺失的年龄使用平均年龄填充，使用 pandas 可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[&apos;Age&apos;].fillna(df[&apos;Age&apos;].mean(), inplace=True)</span><br></pre></td></tr></table></figure>
+<p>使用最高频填充则可以先通过 value_counts 获取字段最高频次，再进行填充：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">age_maxf = train_features[&apos;Age&apos;].value_counts().index[0]</span><br><span class="line">train_features[&apos;Age&apos;].fillna(age_maxf, inplace=True)</span><br></pre></td></tr></table></figure>
+<p>另外可以使用函数方法插值，如拉格朗日插值法和牛顿插值法，具体参考张良均等著《Python数据分析与挖掘实战》第四章内容。</p>
+<h3 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h3><p>空行可以直接删除，使用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 2.全面性</span><br><span class="line">比如列的计量单位不统一，如计重单位有的是千克，有的是磅，则需要对单位进行转换：</span><br></pre></td></tr></table></figure></p>
+<h1 id="获取-weight-数据列中单位为-lbs-的数据"><a href="#获取-weight-数据列中单位为-lbs-的数据" class="headerlink" title="获取 weight 数据列中单位为 lbs 的数据"></a>获取 weight 数据列中单位为 lbs 的数据</h1><p>rows_with_lbs = df[‘weight’].str.contains(‘lbs’).fillna(False)<br>print df[rows_with_lbs]</p>
+<h1 id="将-lbs-转换为-kgs-2-2lbs-1kgs"><a href="#将-lbs-转换为-kgs-2-2lbs-1kgs" class="headerlink" title="将 lbs 转换为 kgs, 2.2lbs=1kgs"></a>将 lbs 转换为 kgs, 2.2lbs=1kgs</h1><p>for i,lbs_row in df[rows_with_lbs].iterrows():</p>
+<pre><code># 截取从头开始到倒数第三个字符之前，即去掉 lbs。
+weight = int(float(lbs_row[&apos;weight&apos;][:-3])/2.2)
+df.at[i,&apos;weight&apos;] = &apos;{}kgs&apos;.format(weight) 
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 3.合法性</span><br><span class="line">可以采用删除或替换的方法解决非 ASCII 问题，这里使用删除方法：</span><br></pre></td></tr></table></figure>
+<h1 id="删除非-ASCII-字符"><a href="#删除非-ASCII-字符" class="headerlink" title="删除非 ASCII 字符"></a>删除非 ASCII 字符</h1><p>df[‘first_name’].replace({r’[^\x00-\x7F]+’:’’}, regex=True, inplace=True)<br>df[‘last_name’].replace({r’[^\x00-\x7F]+’:’’}, regex=True, inplace=True)</p>
+<p><code>`</code></p>
+<h2 id="4-唯一性"><a href="#4-唯一性" class="headerlink" title="4.唯一性"></a>4.唯一性</h2><h3 id="一列多个参数"><a href="#一列多个参数" class="headerlink" title="一列多个参数"></a>一列多个参数</h3><p>比如将人名列拆分为 firstname 和 lastname ，使用 split 方法。</p>
+<h3 id="重复数据"><a href="#重复数据" class="headerlink" title="重复数据"></a>重复数据</h3><p>使用 pandas 提供的 drop_duplicates()来删除重复数据。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>“没有高质量的数据，就没有高质量的数据挖掘。”</p>
 
       
 
@@ -232,7 +244,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据采集</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据清洗</a>
         		</li>
       		
 		</ul>
@@ -288,7 +300,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/03/27/数据分析笔记：数据采集/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/03/28/数据分析笔记：数据清洗/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -302,18 +314,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/28/数据分析笔记：数据清洗/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据分析笔记：数据清洗
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/03/26/数据分析笔记：爬虫/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据分析笔记：爬虫</div>
+    <a href="/2019/03/27/数据分析笔记：数据采集/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据分析笔记：数据采集</div>
       <i class="icon-circle-right"></i>
     </a>
   

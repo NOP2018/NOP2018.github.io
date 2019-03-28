@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//gongls.me">
-  <title>数据分析笔记：数据采集 | Gongls</title>
+  <title>Tag: 数据清洗 | Gongls</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等">
-<meta name="keywords" content="数据分析,数据采集">
-<meta property="og:type" content="article">
-<meta property="og:title" content="数据分析笔记：数据采集">
-<meta property="og:url" content="//gongls.me/2019/03/27/数据分析笔记：数据采集/index.html">
+  <meta name="description" content="Of Course I Still Love You">
+<meta name="keywords" content="Python;DataScience;ML">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gongls">
+<meta property="og:url" content="//gongls.me/tags/数据清洗/index.html">
 <meta property="og:site_name" content="Gongls">
-<meta property="og:description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等">
+<meta property="og:description" content="Of Course I Still Love You">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-27T05:57:17.509Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据分析笔记：数据采集">
-<meta name="twitter:description" content="需要通过多源的数据采集，收集到尽可能多的数据维度，同时保证数据的质量。数据源可以分为以下四类：  开放数据源 爬虫抓取 日志采集，包括前端采集，后端脚本 传感器，如图像等">
+<meta name="twitter:title" content="Gongls">
+<meta name="twitter:description" content="Of Course I Still Love You">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -155,74 +154,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-数据分析笔记：数据采集" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      数据分析笔记：数据采集
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/03/28/数据分析笔记：数据清洗/" class="archive-article-date">
+  	<time datetime="2019-03-28T09:07:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-28</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/03/28/数据分析笔记：数据清洗/">数据分析笔记：数据清洗</a>
     </h1>
   
 
-        
-        <a href="/2019/03/27/数据分析笔记：数据采集/" class="archive-article-date">
-  	<time datetime="2019-03-27T04:06:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>需要通过<strong>多源的数据采集</strong>，收集到尽可能多的数据维度，同时保证数据的质量。<br>数据源可以分为以下四类：</p>
-<ol>
-<li>开放数据源</li>
-<li>爬虫抓取</li>
-<li>日志采集，包括前端采集，后端脚本</li>
-<li>传感器，如图像等<a id="more"></a>
-<h2 id="如何使用开放数据源"><a href="#如何使用开放数据源" class="headerlink" title="如何使用开放数据源"></a>如何使用开放数据源</h2>可以从两个维度考虑，一是单位的维度，如政府、企业、高校等；另一个是行业维度，如交通、金融、能源等领域。<br>也就是，搜索政府企业的公开数据，各种网站如Google，Facebook等，以及一些比赛平台的公开数据，如kaggle，天池等。<h2 id="如何使用爬虫抓取"><a href="#如何使用爬虫抓取" class="headerlink" title="如何使用爬虫抓取"></a>如何使用爬虫抓取</h2>自己写 python 爬虫时，一般会经历三个过程：</li>
-<li>使用 requests 爬取内容</li>
-<li>使用 Xpath 解析内容。Xpath 也就是XML路径语言。</li>
-<li>使用 pandas 保存数据</li>
-</ol>
-<p>或者可以直接使用现有爬虫框架甚至爬虫软件。爬虫框架可以使用scrapy ，软件可以使用八爪鱼，后续详细介绍使用。</p>
-<h2 id="如何使用日志采集工具"><a href="#如何使用日志采集工具" class="headerlink" title="如何使用日志采集工具"></a>如何使用日志采集工具</h2><p>日志采集最重要的作用就是，通过分析用户访问情况，提升系统的性能和承载量。<br>日志记录了用户访问网站的全过程：谁，在什么时间，通过什么方式访问，执行了哪些操作，系统是否产生了错误，用户的ip、http请求的时间等。<br>日志采集包括两种形式：</p>
-<ol>
-<li>通过web服务器采集，例如 httpd、Nginx、Tomcat 都带有日志记录功能。</li>
-<li>自定义采集用户行为，例如通过js代码监听用户行为等。</li>
-</ol>
-<h3 id="埋点是什么"><a href="#埋点是什么" class="headerlink" title="埋点是什么"></a>埋点是什么</h3><p>埋点是日志采集的关键步骤。<strong>埋点是在有需要的位置采集相应的信息，进行上报。</strong><br>埋点就是在你需要统计数据的地方植入统计代码，植入代码可以自己写，也可以使用第三方统计工具，如友盟、Google analysis、talkindata 等。他们都是采用前端埋点的方式，然后在第三方工具里能看到用户的行为数据。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总之获取数据的方式很多，多尝试。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝咖啡<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -232,121 +193,25 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据采集</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据清洗</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/03/27/数据分析笔记：数据采集/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/03/28/数据分析笔记：数据清洗/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据分析笔记：数据清洗
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/03/26/数据分析笔记：爬虫/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据分析笔记：爬虫</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -369,9 +234,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
