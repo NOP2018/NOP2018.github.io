@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//gongls.me">
-  <title>TEST TEST TEST | Gongls</title>
+  <title>数据分析笔记：信用卡违约分析 | Gongls</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="是的那就真的要开始了记录了啊！">
-<meta name="keywords" content="Python;DataScience;ML">
+  <meta name="description" content="数据集来自 UCI Machine Learning Repository, 是台湾某银行2005年4月到2005年9月的信用卡数据，目标是针对这个数据集构建多个分类器，包括 SVM, 随机森林, 和 KNN，可以使用 GridSearch 这个工具来选择具体哪个分类器，以及参数优化。">
+<meta name="keywords" content="SVM,随机森林,KNN,信用卡违约">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TEST TEST TEST">
-<meta property="og:url" content="//gongls.me/2019/03/07/TEST-TEST-TEST/index.html">
+<meta property="og:title" content="数据分析笔记：信用卡违约分析">
+<meta property="og:url" content="//gongls.me/2019/04/04/数据分析笔记：信用卡违约分析/index.html">
 <meta property="og:site_name" content="Gongls">
-<meta property="og:description" content="是的那就真的要开始了记录了啊！">
+<meta property="og:description" content="数据集来自 UCI Machine Learning Repository, 是台湾某银行2005年4月到2005年9月的信用卡数据，目标是针对这个数据集构建多个分类器，包括 SVM, 随机森林, 和 KNN，可以使用 GridSearch 这个工具来选择具体哪个分类器，以及参数优化。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-07T14:05:34.255Z">
+<meta property="og:image" content="//gongls.me/images/credit.png">
+<meta property="og:updated_time" content="2019-04-04T09:34:16.068Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TEST TEST TEST">
-<meta name="twitter:description" content="是的那就真的要开始了记录了啊！">
+<meta name="twitter:title" content="数据分析笔记：信用卡违约分析">
+<meta name="twitter:description" content="数据集来自 UCI Machine Learning Repository, 是台湾某银行2005年4月到2005年9月的信用卡数据，目标是针对这个数据集构建多个分类器，包括 SVM, 随机森林, 和 KNN，可以使用 GridSearch 这个工具来选择具体哪个分类器，以及参数优化。">
+<meta name="twitter:image" content="//gongls.me/images/credit.png">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -155,27 +157,50 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-TEST-TEST-TEST" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-数据分析笔记：信用卡违约分析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      TEST TEST TEST
+      数据分析笔记：信用卡违约分析
     </h1>
   
 
         
-        <a href="/2019/03/07/TEST-TEST-TEST/" class="archive-article-date">
-  	<time datetime="2019-03-07T14:02:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-07</time>
+        <a href="/2019/04/04/数据分析笔记：信用卡违约分析/" class="archive-article-date">
+  	<time datetime="2019-04-04T08:59:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="是的"><a href="#是的" class="headerlink" title="是的"></a>是的</h1><p>那就真的要开始了记录了啊！</p>
+        <p>数据集来自 UCI Machine Learning Repository, 是台湾某银行2005年4月到2005年9月的信用卡数据，目标是针对这个数据集构建多个分类器，包括 SVM, 随机森林, 和 KNN，可以使用 GridSearch 这个工具来选择具体哪个分类器，以及参数优化。<br><a id="more"></a></p>
+<h2 id="GridSearchCV-参数调优"><a href="#GridSearchCV-参数调优" class="headerlink" title="GridSearchCV 参数调优"></a>GridSearchCV 参数调优</h2><p>GridSearchCV 工具来自机器学习库 sklearn，给定需要调优的参数和参数范围，它就能把所有情况跑一遍，并得出最优参数。<br>首先需要引入工具包：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br></pre></td></tr></table></figure>
+<p>然后可以使用 GridSearchCV(estimator,param_grid,cv=None,scoring=None) 构造参数自动搜索模块。之后可以使用 fit 函数拟合训练，使用 predict 预测，预测时采用的就是最优参数下的分类器。以 sklearn 自带鸢尾花数据集为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># 使用 RandomForest 对 IRIS 数据集进行分类</span></span><br><span class="line"><span class="comment"># 利用 GridSearchCV 寻找最优参数</span></span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line">rf = RandomForestClassifier()</span><br><span class="line">parameters = &#123;<span class="string">"n_estimators"</span>: range(<span class="number">1</span>,<span class="number">11</span>)&#125;</span><br><span class="line">iris = load_iris()</span><br><span class="line"><span class="comment"># 使用 GridSearchCV 进行参数调优</span></span><br><span class="line">clf = GridSearchCV(estimator=rf, param_grid=parameters)</span><br><span class="line"><span class="comment"># 对 iris 数据集进行分类</span></span><br><span class="line">clf.fit(iris.data, iris.target)</span><br><span class="line">print(<span class="string">" 最优分数： %.4lf"</span> %clf.best_score_)</span><br><span class="line">print(<span class="string">" 最优参数："</span>, clf.best_params_)</span><br><span class="line">运行结果如下：</span><br><span class="line">最优分数： <span class="number">0.9667</span></span><br><span class="line">最优参数： &#123;<span class="string">'n_estimators'</span>: <span class="number">6</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>具体对什么参数调优合理，可以阅读分类器的文档，了解各个参数的意义。</p>
+<h2 id="Pipeline-管道机制"><a href="#Pipeline-管道机制" class="headerlink" title="Pipeline 管道机制"></a>Pipeline 管道机制</h2><p>Python 中的管道机制，可以让我们把每一步都按顺序列下来，从而创建 Pipeline 流水线作业，每一步采用（‘名称’，步骤）表示。<br>比如上面的鸢尾花代码可以增加和改写成如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line">rf = RandomForestClassifier()</span><br><span class="line">pipeline = Pipeline([</span><br><span class="line">        (<span class="string">'scaler'</span>, StandardScaler()),</span><br><span class="line">        (<span class="string">'randomforestclassifier'</span>, rf)</span><br><span class="line">])</span><br><span class="line">clf = GridSearchCV(estimator=pipeline, param_grid=parameters)</span><br></pre></td></tr></table></figure>
+<h2 id="信用卡违约率分析"><a href="#信用卡违约率分析" class="headerlink" title="信用卡违约率分析"></a>信用卡违约率分析</h2><h3 id="字段说明"><a href="#字段说明" class="headerlink" title="字段说明"></a>字段说明</h3><p><img src="/images/credit.png" alt></p>
+<h3 id="模型选择"><a href="#模型选择" class="headerlink" title="模型选择"></a>模型选择</h3><p>选择 SVM, RF随机森林, KNN 分类器对模型进行分析，使用 GridSearch 获取最佳参数，所有库来自 sklearn，代码详见 <a href="https://github.com/NOP2018/creditcard_default/blob/master/credit_default_analysis.ipynb" target="_blank" rel="noopener">GitHub</a> 。最终模型的得分如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GridSearch最优参数： &#123;<span class="string">'svc__C'</span>: <span class="number">1</span>, <span class="string">'svc__gamma'</span>: <span class="number">0.01</span>&#125;</span><br><span class="line">GridSearch最优分数： <span class="number">0.8173</span></span><br><span class="line">准确率 <span class="number">0.8195</span></span><br><span class="line"></span><br><span class="line">GridSearch最优参数： &#123;<span class="string">'randomforestclassifier__n_estimators'</span>: <span class="number">6</span>&#125;</span><br><span class="line">GridSearch最优分数： <span class="number">0.7984</span></span><br><span class="line">准确率 <span class="number">0.8047</span></span><br><span class="line"></span><br><span class="line">GridSearch最优参数： &#123;<span class="string">'kneighborsclassifier__n_neighbors'</span>: <span class="number">8</span>&#125;</span><br><span class="line">GridSearch最优分数： <span class="number">0.8040</span></span><br><span class="line">准确率 <span class="number">0.8038</span></span><br></pre></td></tr></table></figure>
+<p>可见 SVM 分类器的准确率最高。</p>
+<h3 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h3><p>使用 SVM 作进一步分析，代码详见 <a href="https://github.com/NOP2018/creditcard_default/blob/master/credit_default_svm.ipynb" target="_blank" rel="noopener">GitHub</a></p>
+<h4 id="数据观察"><a href="#数据观察" class="headerlink" title="数据观察"></a>数据观察</h4><p>通过观察变量的关系，发现在最后的12个特征中，分别代表过去六个月的还款和账单数额，0代表未还款，发现最后六个特征的未还款期数和与违约存在正对应关系，所以在模型中需要增加一列表示这个值。 另外性别、教育和结婚情况是分类特征，需要作一个离散化处理，可以使用 One-Hot-Encode。</p>
+<h4 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h4><p>构建新的特征列，分别表示账单为0和还款为0的情况：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">'bill_0count'</span>] = data[[<span class="string">'BILL_AMT1'</span>,<span class="string">'BILL_AMT2'</span>,</span><br><span class="line">                    <span class="string">'BILL_AMT3'</span>,<span class="string">'BILL_AMT4'</span>,<span class="string">'BILL_AMT5'</span>,<span class="string">'BILL_AMT6'</span>]].apply(<span class="keyword">lambda</span> x : x.value_counts().get(<span class="number">0</span>,<span class="number">0</span>),axis=<span class="number">1</span>)</span><br><span class="line">data[<span class="string">'pay_0count'</span>] = data[[<span class="string">'PAY_AMT1'</span>,<span class="string">'PAY_AMT2'</span>,</span><br><span class="line">                    <span class="string">'PAY_AMT3'</span>,<span class="string">'PAY_AMT4'</span>,<span class="string">'PAY_AMT5'</span>,<span class="string">'PAY_AMT6'</span>]].apply(<span class="keyword">lambda</span> x : x.value_counts().get(<span class="number">0</span>,<span class="number">0</span>),axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>然后两项相减，获得有账单但未还款统计的特征列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data.drop([<span class="string">'ID'</span>,<span class="string">'pay_0count'</span>,<span class="string">'bill_0count'</span>], inplace=<span class="literal">True</span>, axis=<span class="number">1</span>)</span><br><span class="line">target = data[<span class="string">'default.payment.next.month'</span>]</span><br><span class="line">columns = data.columns.tolist()</span><br><span class="line">columns.remove(<span class="string">'default.payment.next.month'</span>)</span><br><span class="line">features = data[columns]</span><br></pre></td></tr></table></figure>
+<p>使用 OneHotEncoder 将分类特征离散化：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</span><br><span class="line">OHE = OneHotEncoder(sparse=<span class="literal">False</span>)</span><br><span class="line">sex = OHE.fit_transform(features[[<span class="string">'SEX'</span>]])</span><br><span class="line">marriage = OHE.fit_transform(features[[<span class="string">'MARRIAGE'</span>]])</span><br><span class="line">education = OHE.fit_transform(features[[<span class="string">'EDUCATION'</span>]])</span><br><span class="line">cat_variables = np.hstack((sex, marriage, education))</span><br><span class="line">cat_var_names = [<span class="string">'SEX'</span>,<span class="string">'MARRIAGE'</span>, <span class="string">'EDUCATION'</span>]</span><br><span class="line">num_variables = features.drop(cat_var_names, axis=<span class="number">1</span>)</span><br><span class="line">final_features = np.hstack((cat_variables,num_variables))</span><br></pre></td></tr></table></figure>
+<h4 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h4><p>最后使用 SVM 进行分类的结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GridSearch最优参数： &#123;<span class="string">'svc__C'</span>: <span class="number">1</span>, <span class="string">'svc__gamma'</span>: <span class="number">0.01</span>&#125;</span><br><span class="line">GridSearch最优分数： <span class="number">0.8178</span></span><br><span class="line">准确率 <span class="number">0.8220</span></span><br></pre></td></tr></table></figure>
+<p>分类准确率提高到0.8220.</p>
+<h3 id="业务解析"><a href="#业务解析" class="headerlink" title="业务解析"></a>业务解析</h3><p>可以比较明显地看到，如果客户如果在近期存在违约的情况，很大可能会继续违约，风险管理中，应该对这类客户重点防御。</p>
 
       
 
@@ -205,6 +230,29 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SVM</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">随机森林</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">KNN</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">信用卡违约</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -255,7 +303,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/03/07/TEST-TEST-TEST/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/04/04/数据分析笔记：信用卡违约分析/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -269,18 +317,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/14/面试记录——微众银行数据分析/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          面试记录——微众银行数据分析
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/03/07/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2019/03/31/数据分析笔记：变换/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据分析笔记：变换</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Gongls">
 <meta property="og:description" content="遇到的各种数据，质量参差不齐，往往不能直接满足挖掘分析需求，这时就需要做一个前期准备工作，也就是数据清洗。数据清洗工作可以使用 python 中的 pandas 工具，pandas 中有大量的库，我们可以用来进行高效的清洗工作。质量高的数据应该具有以下四点特性：  完整性：数据是否存在空值，字段是否完善； 全面性：观察某一列的全部数值，通过常识或统计方法判断该列是否有问题，比如：数据的定义、单位标">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-28T09:52:16.226Z">
+<meta property="og:updated_time" content="2019-04-01T08:09:29.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据分析笔记：数据清洗">
 <meta name="twitter:description" content="遇到的各种数据，质量参差不齐，往往不能直接满足挖掘分析需求，这时就需要做一个前期准备工作，也就是数据清洗。数据清洗工作可以使用 python 中的 pandas 工具，pandas 中有大量的库，我们可以用来进行高效的清洗工作。质量高的数据应该具有以下四点特性：  完整性：数据是否存在空值，字段是否完善； 全面性：观察某一列的全部数值，通过常识或统计方法判断该列是否有问题，比如：数据的定义、单位标">
@@ -190,19 +190,13 @@
 <li>不处理。</li>
 </ol>
 <p>以下主要介绍插补的方法。<br>比如对数据age属性中缺失的年龄使用平均年龄填充，使用 pandas 可以这样写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[&apos;Age&apos;].fillna(df[&apos;Age&apos;].mean(), inplace=True)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'Age'</span>].fillna(df[<span class="string">'Age'</span>].mean(), inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 <p>使用最高频填充则可以先通过 value_counts 获取字段最高频次，再进行填充：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">age_maxf = train_features[&apos;Age&apos;].value_counts().index[0]</span><br><span class="line">train_features[&apos;Age&apos;].fillna(age_maxf, inplace=True)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">age_maxf = train_features[<span class="string">'Age'</span>].value_counts().index[<span class="number">0</span>]</span><br><span class="line">train_features[<span class="string">'Age'</span>].fillna(age_maxf, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 <p>另外可以使用函数方法插值，如拉格朗日插值法和牛顿插值法，具体参考张良均等著《Python数据分析与挖掘实战》第四章内容。</p>
-<h3 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h3><p>空行可以直接删除，使用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 2.全面性</span><br><span class="line">比如列的计量单位不统一，如计重单位有的是千克，有的是磅，则需要对单位进行转换：</span><br></pre></td></tr></table></figure></p>
-<h1 id="获取-weight-数据列中单位为-lbs-的数据"><a href="#获取-weight-数据列中单位为-lbs-的数据" class="headerlink" title="获取 weight 数据列中单位为 lbs 的数据"></a>获取 weight 数据列中单位为 lbs 的数据</h1><p>rows_with_lbs = df[‘weight’].str.contains(‘lbs’).fillna(False)<br>print df[rows_with_lbs]</p>
-<h1 id="将-lbs-转换为-kgs-2-2lbs-1kgs"><a href="#将-lbs-转换为-kgs-2-2lbs-1kgs" class="headerlink" title="将 lbs 转换为 kgs, 2.2lbs=1kgs"></a>将 lbs 转换为 kgs, 2.2lbs=1kgs</h1><p>for i,lbs_row in df[rows_with_lbs].iterrows():</p>
-<pre><code># 截取从头开始到倒数第三个字符之前，即去掉 lbs。
-weight = int(float(lbs_row[&apos;weight&apos;][:-3])/2.2)
-df.at[i,&apos;weight&apos;] = &apos;{}kgs&apos;.format(weight) 
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 3.合法性</span><br><span class="line">可以采用删除或替换的方法解决非 ASCII 问题，这里使用删除方法：</span><br></pre></td></tr></table></figure>
-<h1 id="删除非-ASCII-字符"><a href="#删除非-ASCII-字符" class="headerlink" title="删除非 ASCII 字符"></a>删除非 ASCII 字符</h1><p>df[‘first_name’].replace({r’[^\x00-\x7F]+’:’’}, regex=True, inplace=True)<br>df[‘last_name’].replace({r’[^\x00-\x7F]+’:’’}, regex=True, inplace=True)</p>
-<p><code>`</code></p>
+<h3 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h3><p>空行可以直接删除，使用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 2.全面性</span><br><span class="line">比如列的计量单位不统一，如计重单位有的是千克，有的是磅，则需要对单位进行转换：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line"># 获取 weight 数据列中单位为 lbs 的数据</span><br><span class="line">rows_with_lbs = df[&apos;weight&apos;].str.contains(&apos;lbs&apos;).fillna(False)</span><br><span class="line">print df[rows_with_lbs]</span><br><span class="line"># 将 lbs 转换为 kgs, 2.2lbs=1kgs</span><br><span class="line">for i,lbs_row in df[rows_with_lbs].iterrows():</span><br><span class="line">	# 截取从头开始到倒数第三个字符之前，即去掉 lbs。</span><br><span class="line">	weight = int(float(lbs_row[&apos;weight&apos;][:-3])/2.2)</span><br><span class="line">	df.at[i,&apos;weight&apos;] = &apos;&#123;&#125;kgs&apos;.format(weight)</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-合法性"><a href="#3-合法性" class="headerlink" title="3.合法性"></a>3.合法性</h2><p>可以采用删除或替换的方法解决非 ASCII 问题，这里使用删除方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除非 ASCII 字符</span></span><br><span class="line">df[<span class="string">'first_name'</span>].replace(&#123;<span class="string">r'[^\x00-\x7F]+'</span>:<span class="string">''</span>&#125;, regex=<span class="literal">True</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">df[<span class="string">'last_name'</span>].replace(&#123;<span class="string">r'[^\x00-\x7F]+'</span>:<span class="string">''</span>&#125;, regex=<span class="literal">True</span>, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="4-唯一性"><a href="#4-唯一性" class="headerlink" title="4.唯一性"></a>4.唯一性</h2><h3 id="一列多个参数"><a href="#一列多个参数" class="headerlink" title="一列多个参数"></a>一列多个参数</h3><p>比如将人名列拆分为 firstname 和 lastname ，使用 split 方法。</p>
 <h3 id="重复数据"><a href="#重复数据" class="headerlink" title="重复数据"></a>重复数据</h3><p>使用 pandas 提供的 drop_duplicates()来删除重复数据。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>“没有高质量的数据，就没有高质量的数据挖掘。”</p>
@@ -451,6 +445,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随机森林</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">信用卡违约</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据分析</a>
               </li>
              
@@ -471,19 +481,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">xpath</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
             
             <div class="clearfix"></div>
