@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="Gongls">
 <meta property="og:description" content="数据集来自 UCI Machine Learning Repository, 是台湾某银行2005年4月到2005年9月的信用卡数据，目标是针对这个数据集构建多个分类器，包括 SVM, 随机森林, 和 KNN，可以使用 GridSearch 这个工具来选择具体哪个分类器，以及参数优化。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="//gongls.me/images/credit.png">
-<meta property="og:updated_time" content="2019-04-04T09:34:16.068Z">
+<meta property="og:image" content="//gongls.me/images/credit1.png">
+<meta property="og:updated_time" content="2019-04-04T09:38:28.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据分析笔记：信用卡违约分析">
 <meta name="twitter:description" content="数据集来自 UCI Machine Learning Repository, 是台湾某银行2005年4月到2005年9月的信用卡数据，目标是针对这个数据集构建多个分类器，包括 SVM, 随机森林, 和 KNN，可以使用 GridSearch 这个工具来选择具体哪个分类器，以及参数优化。">
-<meta name="twitter:image" content="//gongls.me/images/credit.png">
+<meta name="twitter:image" content="//gongls.me/images/credit1.png">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -185,7 +185,7 @@
 <p>具体对什么参数调优合理，可以阅读分类器的文档，了解各个参数的意义。</p>
 <h2 id="Pipeline-管道机制"><a href="#Pipeline-管道机制" class="headerlink" title="Pipeline 管道机制"></a>Pipeline 管道机制</h2><p>Python 中的管道机制，可以让我们把每一步都按顺序列下来，从而创建 Pipeline 流水线作业，每一步采用（‘名称’，步骤）表示。<br>比如上面的鸢尾花代码可以增加和改写成如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line">rf = RandomForestClassifier()</span><br><span class="line">pipeline = Pipeline([</span><br><span class="line">        (<span class="string">'scaler'</span>, StandardScaler()),</span><br><span class="line">        (<span class="string">'randomforestclassifier'</span>, rf)</span><br><span class="line">])</span><br><span class="line">clf = GridSearchCV(estimator=pipeline, param_grid=parameters)</span><br></pre></td></tr></table></figure>
-<h2 id="信用卡违约率分析"><a href="#信用卡违约率分析" class="headerlink" title="信用卡违约率分析"></a>信用卡违约率分析</h2><h3 id="字段说明"><a href="#字段说明" class="headerlink" title="字段说明"></a>字段说明</h3><p><img src="/images/credit.png" alt></p>
+<h2 id="信用卡违约率分析"><a href="#信用卡违约率分析" class="headerlink" title="信用卡违约率分析"></a>信用卡违约率分析</h2><h3 id="字段说明"><a href="#字段说明" class="headerlink" title="字段说明"></a>字段说明</h3><p><img src="/images/credit1.png" alt></p>
 <h3 id="模型选择"><a href="#模型选择" class="headerlink" title="模型选择"></a>模型选择</h3><p>选择 SVM, RF随机森林, KNN 分类器对模型进行分析，使用 GridSearch 获取最佳参数，所有库来自 sklearn，代码详见 <a href="https://github.com/NOP2018/creditcard_default/blob/master/credit_default_analysis.ipynb" target="_blank" rel="noopener">GitHub</a> 。最终模型的得分如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GridSearch最优参数： &#123;<span class="string">'svc__C'</span>: <span class="number">1</span>, <span class="string">'svc__gamma'</span>: <span class="number">0.01</span>&#125;</span><br><span class="line">GridSearch最优分数： <span class="number">0.8173</span></span><br><span class="line">准确率 <span class="number">0.8195</span></span><br><span class="line"></span><br><span class="line">GridSearch最优参数： &#123;<span class="string">'randomforestclassifier__n_estimators'</span>: <span class="number">6</span>&#125;</span><br><span class="line">GridSearch最优分数： <span class="number">0.7984</span></span><br><span class="line">准确率 <span class="number">0.8047</span></span><br><span class="line"></span><br><span class="line">GridSearch最优参数： &#123;<span class="string">'kneighborsclassifier__n_neighbors'</span>: <span class="number">8</span>&#125;</span><br><span class="line">GridSearch最优分数： <span class="number">0.8040</span></span><br><span class="line">准确率 <span class="number">0.8038</span></span><br></pre></td></tr></table></figure>
 <p>可见 SVM 分类器的准确率最高。</p>
