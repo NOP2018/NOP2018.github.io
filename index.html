@@ -156,6 +156,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Scrapy-MongoDB-爬新浪微博" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/04/Scrapy-MongoDB-爬新浪微博/">Scrapy+MongoDB 爬新浪微博</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/04/Scrapy-MongoDB-爬新浪微博/" class="archive-article-date">
+  	<time datetime="2019-04-04T09:42:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考大神<a href="https://github.com/nghuyong/WeiboSpider/tree/simple" target="_blank" rel="noopener">@nghuyong</a> 的微博爬虫代码，使用 scrapy 和 mongodb 爬取和存储数据。<br>目的是爬取洋葱故事会发布的假新闻和头条新闻发布的真新闻，以便后续作洋葱新闻鉴别（如果做得了的话），只需要原创微博内容数据，去除参考代码中爬取转评赞数据和评论数据的功能。<br>另外，其实我只需要新闻标题，所以在爬虫中对微博内容文本作了正则匹配。<br>依赖环境：<br>selenium==3.6.0,Scrapy==1.5.1,pymongo==3.5.1,Pillow==5.2.0,lxml=4.2.5. 电脑需要安装 MongoDB，安装教程参考<a href="http://www.runoob.com/mongodb/mongodb-window-install.html" target="_blank" rel="noopener">菜鸟教程</a>，或者查看<a href="https://www.mongodb.com/" target="_blank" rel="noopener">官方文档</a><br>
+        
+      
+
+      
+    </p></div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Scrapy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">微博爬虫</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/04/Scrapy-MongoDB-爬新浪微博/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-数据分析笔记：信用卡违约分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -889,19 +971,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
+                <a href="javascript:void(0)" class="js-tag color2">Scrapy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随机森林</a>
+                <a href="javascript:void(0)" class="js-tag color3">MongoDB</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">信用卡违约</a>
+                <a href="javascript:void(0)" class="js-tag color5">微博爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -921,6 +999,30 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随机森林</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">信用卡违约</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据采集</a>
               </li>
              
@@ -930,14 +1032,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">xpath</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
             
             <div class="clearfix"></div>
