@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="Gongls">
 <meta property="og:description" content="参考大神@nghuyong 的微博爬虫代码，使用 scrapy 和 mongodb 爬取和存储数据。目的是爬取洋葱故事会发布的假新闻和头条新闻发布的真新闻，以便后续作洋葱新闻鉴别（如果做得了的话），只需要原创微博内容数据，去除参考代码中爬取转评赞数据和评论数据的功能。另外，其实我只需要新闻标题，所以在爬虫中对微博内容文本作了正则匹配。依赖环境：selenium==3.6.0,Scrapy==1.5">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="//gongls.me/2019/04/04/Scrapy-MongoDB-爬新浪微博/images/spider1.png">
-<meta property="og:updated_time" content="2019-04-04T10:48:23.094Z">
+<meta property="og:image" content="//gongls.me/images/spider1.png">
+<meta property="og:updated_time" content="2019-04-04T10:53:01.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scrapy+MongoDB 爬新浪微博">
 <meta name="twitter:description" content="参考大神@nghuyong 的微博爬虫代码，使用 scrapy 和 mongodb 爬取和存储数据。目的是爬取洋葱故事会发布的假新闻和头条新闻发布的真新闻，以便后续作洋葱新闻鉴别（如果做得了的话），只需要原创微博内容数据，去除参考代码中爬取转评赞数据和评论数据的功能。另外，其实我只需要新闻标题，所以在爬虫中对微博内容文本作了正则匹配。依赖环境：selenium==3.6.0,Scrapy==1.5">
-<meta name="twitter:image" content="//gongls.me/2019/04/04/Scrapy-MongoDB-爬新浪微博/images/spider1.png">
+<meta name="twitter:image" content="//gongls.me/images/spider1.png">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -181,10 +181,11 @@
 <h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>在所选路径使用命令行（推荐cmder）执行命令 scrapy startproject+项目名称。</p>
 <h2 id="item-py"><a href="#item-py" class="headerlink" title="item.py"></a>item.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> Item, Field</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TweetsItem</span><span class="params">(Item)</span>:</span></span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    weibo_url = Field()  <span class="comment"># 微博URL</span></span><br><span class="line">    created_at = Field()  <span class="comment"># 微博发表时间</span></span><br><span class="line">    content = Field()  <span class="comment"># 微博内容</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InformationItem</span><span class="params">(Item)</span>:</span></span><br><span class="line">    <span class="string">""" 个人信息 """</span></span><br><span class="line">    _id = Field()  <span class="comment"># 用户ID</span></span><br><span class="line">    nick_name = Field()  <span class="comment"># 昵称</span></span><br><span class="line">    gender = Field()  <span class="comment"># 性别</span></span><br><span class="line">    province = Field()  <span class="comment"># 所在省</span></span><br><span class="line">    city = Field()  <span class="comment"># 所在城市</span></span><br><span class="line">    brief_introduction = Field()  <span class="comment"># 简介</span></span><br><span class="line">    birthday = Field()  <span class="comment"># 生日</span></span><br><span class="line">    tweets_num = Field()  <span class="comment"># 微博数</span></span><br><span class="line">    follows_num = Field()  <span class="comment"># 关注数</span></span><br><span class="line">    fans_num = Field()  <span class="comment"># 粉丝数</span></span><br><span class="line">    sex_orientation = Field()  <span class="comment"># 性取向</span></span><br><span class="line">    sentiment = Field()  <span class="comment"># 感情状况</span></span><br><span class="line">    vip_level = Field()  <span class="comment"># 会员等级</span></span><br><span class="line">    authentication = Field()  <span class="comment"># 认证</span></span><br><span class="line">    person_url = Field()  <span class="comment"># 首页链接</span></span><br><span class="line">    crawl_time = Field()  <span class="comment"># 抓取时间戳</span></span><br><span class="line">    labels = Field()  <span class="comment"># 标签</span></span><br></pre></td></tr></table></figure>
 <p>如果有其他抓取需求，可以在 items.py 中先添加定义。</p>
-<h2 id="spiders-py"><a href="#spiders-py" class="headerlink" title="spiders.py"></a>spiders.py</h2><p>先在项目路径内执行命令 <figure class="highlight plain"><figcaption><span>genspider spidername weibo.cn``` 创建爬虫，然后编辑，具体代码[GitHub](https://github.com/NOP2018/onion_detection/tree/master/WeiboScrapy)。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">两个微博账号在发原创新闻时都会在开头使用【】括号当标题，使用正则表达式可以很方便提取。</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">all_content = tweet_content_node.xpath(&apos;string(.)&apos;).replace(&apos;\u200b&apos;, &apos;&apos;).strip()</span><br><span class="line">pattern = re.compile(r&apos;[【](.*?)[】]&apos;,re.S)   #获取标题</span><br><span class="line">all_title = re.findall(pattern, all_content)</span><br><span class="line">tweet_item[&apos;content&apos;] = all_title[0]</span><br><span class="line">yield tweet_item</span><br></pre></td></tr></table></figure></p>
+<h2 id="spiders-py"><a href="#spiders-py" class="headerlink" title="spiders.py"></a>spiders.py</h2><p>先在项目路径内执行命令 scrapy genspider spidername weibo.cn 创建爬虫，然后编辑，具体代码<a href="https://github.com/NOP2018/onion_detection/tree/master/WeiboScrapy" target="_blank" rel="noopener">GitHub</a>。<br>两个微博账号在发原创新闻时都会在开头使用【】括号当标题，使用正则表达式可以很方便提取。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">all_content = tweet_content_node.xpath(<span class="string">'string(.)'</span>).replace(<span class="string">'\u200b'</span>, <span class="string">''</span>).strip()</span><br><span class="line">pattern = re.compile(<span class="string">r'[【](.*?)[】]'</span>,re.S)   <span class="comment">#获取标题</span></span><br><span class="line">all_title = re.findall(pattern, all_content)</span><br><span class="line">tweet_item[<span class="string">'content'</span>] = all_title[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">yield</span> tweet_item</span><br></pre></td></tr></table></figure>
 <h2 id="pipeline-py"><a href="#pipeline-py" class="headerlink" title="pipeline.py"></a>pipeline.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"><span class="keyword">from</span> pymongo.errors <span class="keyword">import</span> DuplicateKeyError</span><br><span class="line"><span class="keyword">from</span> WeiboScrapy.items <span class="keyword">import</span> TweetsItem, InformationItem</span><br><span class="line"><span class="keyword">from</span> WeiboScrapy.settings <span class="keyword">import</span> LOCAL_MONGO_HOST, LOCAL_MONGO_PORT, DB_NAME</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MongoDBPipeline</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        client = pymongo.MongoClient(LOCAL_MONGO_HOST, LOCAL_MONGO_PORT)</span><br><span class="line">        db = client[DB_NAME]</span><br><span class="line">        self.Information = db[<span class="string">"Information"</span>]</span><br><span class="line">        self.Tweets = db[<span class="string">"Tweets"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(item, TweetsItem):</span><br><span class="line">            self.insert_item(self.Tweets, item)</span><br><span class="line">        <span class="keyword">elif</span> isinstance(item, InformationItem):</span><br><span class="line">            self.insert_item(self.Information, item)</span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert_item</span><span class="params">(collection, item)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            collection.insert(dict(item))</span><br><span class="line">        <span class="keyword">except</span> DuplicateKeyError:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 <h2 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py"></a>settings.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">BOT_NAME = <span class="string">'WeiboScrapy'</span></span><br><span class="line"></span><br><span class="line">SPIDER_MODULES = [<span class="string">'WeiboScrapy.spiders'</span>]</span><br><span class="line">NEWSPIDER_MODULE = <span class="string">'WeiboScrapy.spiders'</span></span><br><span class="line">ROBOTSTXT_OBEY = <span class="literal">False</span></span><br><span class="line">CONCURRENT_REQUESTS = <span class="number">16</span></span><br><span class="line">DOWNLOAD_DELAY = <span class="number">3</span></span><br><span class="line">DEFAULT_REQUEST_HEADERS =&#123;</span><br><span class="line">	<span class="string">'User-Agent'</span>:</span><br><span class="line">	<span class="string">'cookie'</span>: <span class="comment">#登录weibo.cn，开发者模式获取cookie</span></span><br><span class="line">&#125;</span><br><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">    <span class="string">'WeiboScrapy.pipelines.MongoDBPipeline'</span>: <span class="number">300</span>,</span><br><span class="line">&#125;</span><br><span class="line">LOCAL_MONGO_HOST = <span class="string">'127.0.0.1'</span></span><br><span class="line">LOCAL_MONGO_PORT = <span class="number">27017</span></span><br><span class="line">DB_NAME = <span class="string">'Toutiao'</span></span><br></pre></td></tr></table></figure>
-<h2 id="开爬"><a href="#开爬" class="headerlink" title="开爬"></a>开爬</h2><p>项目路径执行 <code>scrapy crawl spidername</code> 开始运行爬虫。 @nghuyong 单账号版爬虫可以达到每日十万级的抓取量，虽然我还没完整地爬过一天，但是字段减少到只有三个，速度应该会快一点？<br>最终得到洋葱的原创微博标题972个，头条新闻原创微博标题1257个。<br><img src="images/spider1.png" alt><br>似乎有点少，但是账号也没被封，不懂哪里有问题。继续学习吧~</p>
+<h2 id="开爬"><a href="#开爬" class="headerlink" title="开爬"></a>开爬</h2><p>项目路径执行 <code>scrapy crawl spidername</code> 开始运行爬虫。 @nghuyong 单账号版爬虫可以达到每日十万级的抓取量，虽然我还没完整地爬过一天，但是字段减少到只有三个，速度应该会快一点？<br>最终得到洋葱的原创微博标题972个，头条新闻原创微博标题1257个。<br><img src="/images/spider1.png" alt><br>似乎有点少，但是账号也没被封，不懂哪里有问题。继续学习吧~</p>
 
       
 
@@ -449,7 +450,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据清洗</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据采集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">xpath</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,23 +486,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据采集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">xpath</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据清洗</a>
               </li>
             
             <div class="clearfix"></div>
