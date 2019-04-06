@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//gongls.me">
-  <title>Tag: 数据变换 | Gongls</title>
+  <title>数据分析笔记：可视化10种技能 | Gongls</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Of Course I Still Love You">
-<meta name="keywords" content="Python;DataScience;ML">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Gongls">
-<meta property="og:url" content="//gongls.me/tags/数据变换/index.html">
+  <meta name="description" content="在数据挖掘或分析的项目初期，需要进行探索性的数据分析，以便对数据有一定的了解，最直观的方式就是数据可视化。按照数据之间的关系，我们可以把可视化试图分为4类：  比较：比较数据间各类别的关系，或者是它们随时间的变化趋势，如折线图； 联系：查看两个或两个以上变量之间的关系，如散点图； 构成：每个部分占整体的百分比，或者是随着时间的百分比变化，如饼图； 分布：关注单个变量或多个变量的分布情况，如直方图。">
+<meta name="keywords" content="数据分析,可视化,Matplotlib,seaborn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析笔记：可视化10种技能">
+<meta property="og:url" content="//gongls.me/2019/04/06/数据分析笔记：可视化10种技能/index.html">
 <meta property="og:site_name" content="Gongls">
-<meta property="og:description" content="Of Course I Still Love You">
+<meta property="og:description" content="在数据挖掘或分析的项目初期，需要进行探索性的数据分析，以便对数据有一定的了解，最直观的方式就是数据可视化。按照数据之间的关系，我们可以把可视化试图分为4类：  比较：比较数据间各类别的关系，或者是它们随时间的变化趋势，如折线图； 联系：查看两个或两个以上变量之间的关系，如散点图； 构成：每个部分占整体的百分比，或者是随着时间的百分比变化，如饼图； 分布：关注单个变量或多个变量的分布情况，如直方图。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-06T07:07:53.622Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Gongls">
-<meta name="twitter:description" content="Of Course I Still Love You">
+<meta name="twitter:title" content="数据分析笔记：可视化10种技能">
+<meta name="twitter:description" content="在数据挖掘或分析的项目初期，需要进行探索性的数据分析，以便对数据有一定的了解，最直观的方式就是数据可视化。按照数据之间的关系，我们可以把可视化试图分为4类：  比较：比较数据间各类别的关系，或者是它们随时间的变化趋势，如折线图； 联系：查看两个或两个以上变量之间的关系，如散点图； 构成：每个部分占整体的百分比，或者是随着时间的百分比变化，如饼图； 分布：关注单个变量或多个变量的分布情况，如直方图。">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -154,36 +155,82 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-数据分析笔记：可视化10种技能" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/31/数据分析笔记：变换/" class="archive-article-date">
-  	<time datetime="2019-03-31T03:10:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-31</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/31/数据分析笔记：变换/">数据分析笔记：变换</a>
+    <h1 class="article-title" itemprop="name">
+      数据分析笔记：可视化10种技能
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/04/06/数据分析笔记：可视化10种技能/" class="archive-article-date">
+  	<time datetime="2019-04-06T06:12:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在数据挖掘或分析的项目初期，需要进行探索性的数据分析，以便对数据有一定的了解，最直观的方式就是数据可视化。<br>按照数据之间的关系，我们可以把可视化试图分为4类：</p>
+<ol>
+<li>比较：比较数据间各类别的关系，或者是它们随时间的变化趋势，如折线图；</li>
+<li>联系：查看两个或两个以上变量之间的关系，如散点图；</li>
+<li>构成：每个部分占整体的百分比，或者是随着时间的百分比变化，如饼图；</li>
+<li>分布：关注单个变量或多个变量的分布情况，如直方图。</li>
+</ol>
+<p>按照变量的个数，又可以分为单变量分析和多变量分析。<br><a id="more"></a></p>
+<h3 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h3><p>英文为 scatter plot，它将两个变量的值显示在坐标中，适合展示两个变量之间的关系。<br>在 Matplotlib 中，画散点图需要使用 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">也可以使用 seaborn 进行散点图的绘制，举例如下：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import seaborn as sns</span><br><span class="line">N = 1000</span><br><span class="line">x = np.random.randn(N)</span><br><span class="line">y = np.random.randn(N)</span><br><span class="line"># 用 Matplotlib 画散点图</span><br><span class="line">plt.scatter(x, y,marker=&apos;x&apos;)</span><br><span class="line">plt.show()</span><br><span class="line"># 用 Seaborn 画散点图</span><br><span class="line">df = pd.DataFrame(&#123;&apos;x&apos;: x, &apos;y&apos;: y&#125;)</span><br><span class="line">sns.jointplot(x=&quot;x&quot;, y=&quot;y&quot;, data=df, kind=&apos;scatter&apos;);</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<h3 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h3><p>折线图可以用来表示数据随时间变化的趋势。同样使用 Matplotlib 和 seaborn 工具的方式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="comment"># 数据准备</span></span><br><span class="line">x = [<span class="number">2010</span>, <span class="number">2011</span>, <span class="number">2012</span>, <span class="number">2013</span>, <span class="number">2014</span>, <span class="number">2015</span>, <span class="number">2016</span>, <span class="number">2017</span>, <span class="number">2018</span>, <span class="number">2019</span>]</span><br><span class="line">y = [<span class="number">5</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">20</span>, <span class="number">17</span>, <span class="number">16</span>, <span class="number">19</span>, <span class="number">30</span>, <span class="number">32</span>, <span class="number">35</span>]</span><br><span class="line"><span class="comment"># 使用 Matplotlib 画折线图</span></span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 使用 Seaborn 画折线图</span></span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">'x'</span>: x, <span class="string">'y'</span>: y&#125;)</span><br><span class="line">sns.lineplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=df)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><p>在 Matplotlib 中，使用 plt.hist(x,bins=10)，其中 x 是一维数组，bins 是直方图中的区间数，默认是10.<br>在 seaborn 中，使用 sns.distplot(x,bins=10,kde=True)，kde 代表显示核密度估计，默认 True，核密度估计是通过核函数来估计概率密度的方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line">a = np.random.randn(<span class="number">100</span>)</span><br><span class="line">s = pd.Series(a) </span><br><span class="line"><span class="comment"># 用 Matplotlib 画直方图</span></span><br><span class="line">plt.hist(s)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 用 Seaborn 画直方图</span></span><br><span class="line">sns.distplot(s, kde=<span class="literal">False</span>)</span><br><span class="line">plt.show()</span><br><span class="line">sns.distplot(s, kde=<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="条形图"><a href="#条形图" class="headerlink" title="条形图"></a>条形图</h3><p>直方图可以看到变量的数值分布，条形图则可以帮我们查看类别的特征：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="comment"># 数据准备</span></span><br><span class="line">x = [<span class="string">'Cat1'</span>, <span class="string">'Cat2'</span>, <span class="string">'Cat3'</span>, <span class="string">'Cat4'</span>, <span class="string">'Cat5'</span>]</span><br><span class="line">y = [<span class="number">5</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">7</span>]</span><br><span class="line"><span class="comment"># 用 Matplotlib 画条形图</span></span><br><span class="line">plt.bar(x, y)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 用 Seaborn 画条形图</span></span><br><span class="line">sns.barplot(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="箱线图"><a href="#箱线图" class="headerlink" title="箱线图"></a>箱线图</h3><p>箱线图由五个部分组成：最大值 max，最小值 min，中位数 median，和上下四分位数(Q3,Q1)，可以分析数据的差异性、离散程度和异常值等：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据准备</span></span><br><span class="line"><span class="comment"># 生成 0-1 之间的 10*4 维度数据</span></span><br><span class="line">data=np.random.normal(size=(<span class="number">10</span>,<span class="number">4</span>)) </span><br><span class="line">lables = [<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>]</span><br><span class="line"><span class="comment"># 用 Matplotlib 画箱线图</span></span><br><span class="line">plt.boxplot(data,labels=lables)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 用 Seaborn 画箱线图</span></span><br><span class="line">df = pd.DataFrame(data, columns=lables)</span><br><span class="line">sns.boxplot(data=df)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h3><p>Matplotlib 使用示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="comment"># 数据准备</span></span><br><span class="line">nums = [<span class="number">25</span>, <span class="number">37</span>, <span class="number">33</span>, <span class="number">37</span>, <span class="number">6</span>]</span><br><span class="line">labels = [<span class="string">'High-school'</span>,<span class="string">'Bachelor'</span>,<span class="string">'Master'</span>,<span class="string">'Ph.d'</span>, <span class="string">'Others'</span>]</span><br><span class="line"><span class="comment"># 用 Matplotlib 画饼图</span></span><br><span class="line">plt.pie(x = nums, labels=labels)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="热力图"><a href="#热力图" class="headerlink" title="热力图"></a>热力图</h3><p>heat map，是一种矩阵表示方法，矩阵中不同颜色代表不同的数值，是一种非常直观的多元变量分析方法，一般使用 seaborn 绘制：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="comment"># 数据准备</span></span><br><span class="line">flights = sns.load_dataset(<span class="string">"flights"</span>)</span><br><span class="line">data=flights.pivot(<span class="string">'year'</span>,<span class="string">'month'</span>,<span class="string">'passengers'</span>)</span><br><span class="line"><span class="comment"># 用 Seaborn 画热力图</span></span><br><span class="line">sns.heatmap(data)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="蜘蛛图"><a href="#蜘蛛图" class="headerlink" title="蜘蛛图"></a>蜘蛛图</h3><p>蜘蛛图是一种显示一对多关系的方法。在蜘蛛图中，一个变量相对于另一个变量的显著性清晰可见，Matplotlib 例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">from</span> matplotlib.font_manager <span class="keyword">import</span> FontProperties  </span><br><span class="line"><span class="comment"># 数据准备</span></span><br><span class="line">labels=np.array([<span class="string">u" 推进 "</span>,<span class="string">"KDA"</span>,<span class="string">u" 生存 "</span>,<span class="string">u" 团战 "</span>,<span class="string">u" 发育 "</span>,<span class="string">u" 输出 "</span>])</span><br><span class="line">stats=[<span class="number">83</span>, <span class="number">61</span>, <span class="number">95</span>, <span class="number">67</span>, <span class="number">76</span>, <span class="number">88</span>]</span><br><span class="line"><span class="comment"># 画图数据准备，角度、状态值</span></span><br><span class="line">angles=np.linspace(<span class="number">0</span>, <span class="number">2</span>*np.pi, len(labels), endpoint=<span class="literal">False</span>)</span><br><span class="line">stats=np.concatenate((stats,[stats[<span class="number">0</span>]]))</span><br><span class="line">angles=np.concatenate((angles,[angles[<span class="number">0</span>]]))</span><br><span class="line"><span class="comment"># 用 Matplotlib 画蜘蛛图</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.add_subplot(<span class="number">111</span>, polar=<span class="literal">True</span>)   </span><br><span class="line">ax.plot(angles, stats, <span class="string">'o-'</span>, linewidth=<span class="number">2</span>)</span><br><span class="line">ax.fill(angles, stats, alpha=<span class="number">0.25</span>)</span><br><span class="line"><span class="comment"># 设置中文字体</span></span><br><span class="line">font = FontProperties(fname=<span class="string">r"C:\Windows\Fonts\simhei.ttf"</span>, size=<span class="number">14</span>)  </span><br><span class="line">ax.set_thetagrids(angles * <span class="number">180</span>/np.pi, labels, FontProperties=font)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="二元变量分布"><a href="#二元变量分布" class="headerlink" title="二元变量分布"></a>二元变量分布</h3><p>在 seaborn 中，使用二元变量分布非常方便，直接使用 sns.joinplot(x,y,data=None,kind=) 即可，其中 kind 表示不同的视图类型，包括 scatter，kde，hex 等。以 seaborn 自带数据集 tips 为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="comment"># 数据准备</span></span><br><span class="line">tips = sns.load_dataset(<span class="string">"tips"</span>)</span><br><span class="line">print(tips.head(<span class="number">10</span>))</span><br><span class="line"><span class="comment"># 用 Seaborn 画二元变量分布图（散点图，核密度图，Hexbin 图）</span></span><br><span class="line">sns.jointplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>, data=tips, kind=<span class="string">'scatter'</span>)</span><br><span class="line">sns.jointplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>, data=tips, kind=<span class="string">'kde'</span>)</span><br><span class="line">sns.jointplot(x=<span class="string">"total_bill"</span>, y=<span class="string">"tip"</span>, data=tips, kind=<span class="string">'hex'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="成对关系"><a href="#成对关系" class="headerlink" title="成对关系"></a>成对关系</h3><p>在 seaborn 中，可以直接 sns.pairplot() 函数查看成对关系，可以用来分析两个变量之间的关系。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>具体使用什么哪种视图要看具体数据情况，想让视图内容更丰富的话比如设置修改颜色、尺寸等视图属性，可以查看函数文档。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝咖啡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -193,29 +240,129 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据变换</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">可视化</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">scikit-learn</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Matplotlib</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">seaborn</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/04/06/数据分析笔记：可视化10种技能/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/04/06/数据分析笔记：决策树/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          数据分析笔记：决策树
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2019/04/04/Scrapy-MongoDB-爬新浪微博/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Scrapy+MongoDB 爬新浪微博</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -238,9 +385,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
