@@ -6,26 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//gongls.me">
-  <title>面试记录——微众银行数据分析 | Gongls</title>
+  <title>Tag: CART | Gongls</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。">
-<meta name="keywords" content="数据分析,面试,SQL">
-<meta property="og:type" content="article">
-<meta property="og:title" content="面试记录——微众银行数据分析">
-<meta property="og:url" content="//gongls.me/2019/03/14/面试记录——微众银行数据分析/index.html">
+  <meta name="description" content="Of Course I Still Love You">
+<meta name="keywords" content="Python;DataScience;ML">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gongls">
+<meta property="og:url" content="//gongls.me/tags/CART/index.html">
 <meta property="og:site_name" content="Gongls">
-<meta property="og:description" content="其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。">
+<meta property="og:description" content="Of Course I Still Love You">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="//gongls.me/images/bishi1ans.png">
-<meta property="og:image" content="//gongls.me/images/bishi2.png">
-<meta property="og:image" content="//gongls.me/images/bishi3.png">
-<meta property="og:image" content="//gongls.me/images/bishi33.png">
-<meta property="og:image" content="//gongls.me/images/bishi3ans.png">
-<meta property="og:updated_time" content="2019-03-27T05:57:20.747Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="面试记录——微众银行数据分析">
-<meta name="twitter:description" content="其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。">
-<meta name="twitter:image" content="//gongls.me/images/bishi1ans.png">
+<meta name="twitter:title" content="Gongls">
+<meta name="twitter:description" content="Of Course I Still Love You">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -161,62 +154,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-面试记录——微众银行数据分析" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      面试记录——微众银行数据分析
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/04/10/数据分析笔记：决策树-二/" class="archive-article-date">
+  	<time datetime="2019-04-10T09:23:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-10</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/04/10/数据分析笔记：决策树-二/">数据分析笔记：决策树(二)</a>
     </h1>
   
 
-        
-        <a href="/2019/03/14/面试记录——微众银行数据分析/" class="archive-article-date">
-  	<time datetime="2019-03-14T09:19:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>其实是微众银行的外包岗位，本着积累面试经验的原则去参加了，被提前告知这个岗位会很看重SQL，用了半天恶补，早上接到通知，下去就去微众总部了。<br>似乎大家都很忙，干坐了半个多小时，给了两张SQL试题让我先做着又走了。</p>
-<a id="more"></a>
-<h2 id="笔试"><a href="#笔试" class="headerlink" title="笔试"></a>笔试</h2><p>一个大题，两个小题。大题是多表查询并创建新表，题目大意是根据客户在商户扫码和购买礼品卡的时间差，统计商户推广礼品卡的绩效，提供了giftcard，scan，和store三个表。思路是以store为关键表查询，用join语句查询其他两个表，使用的MySQL。用timestampdiff函数计算时间差（因为表中时间格式是timestamp，根据情况不同可以使用其他diff函数如datediff等）。大致解答如下图：<br><img src="/images/bishi1ans.png" alt><br>后面面试过程中会问到思路，join的用法，inner join， left join， 和right join的区别，以前根据这道题的实际情况选择用什么join比较合理。因为我用的是inner join，实际可能存在有商户没有任何礼品卡推广的情况，也就是在giftcard, scan表中的记录为null，所以使用left join更合理些。</p>
-<p>两个小题，和leetcode上的题目很像。其中一个是用一条了sql余韵查询所有课程分数都大于80分的学生名字。<br><img src="/images/bishi2.png" alt><br>主要考察对题目的理解，也就是所有课程大于80分，那就可以使用最小值函数查询。<br>select name from _ group by name having min(score)&gt;80;</p>
-<p>另一个题目，是竖表查成横表。<br><img src="/images/bishi3.png" alt><br>查成这样的：<br><img src="/images/bishi33.png" alt><br>考察mysql的case when语句，解答：<br><img src="/images/bishi3ans.png" alt></p>
-<h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><p>写第一题花了比较多时间，导致后面两题还没来得及做面试官就回来了，开始问思路，很惭愧，两个小题都没能回答好，但是面试官还比较有耐心，也很友好的提醒了我。<br>SQL方面就是这些，然后就开始正式面试，无非就是自我介绍，讲解项目等，由于我是转行的，所以项目这边能讲的就不多。然后问到一点python，主要是pandas中df的一些用法，面试官自己临时想了个题，可能觉得没出好，就作罢。<br>最后就是问为什么离职，为什么选择转行云云，也直接说了转行其实很难的，总之人挺好的。<br>最后的最后考察了一下分析的能力吧，问如果公司未作什么措施而股价却突然上涨的话，我会从哪些方面去分析。我的回答是政策形势，相关行业情况等，好像不太满意，说这些不好量化，也不好统计。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总体来看，还是一次比较愉快的面试，沟通比较顺利，回答不出的时候也不至于尴尬。准备时间多点的话可能情况会好一些，sql方面确实是比较薄弱的，还是要多刷题，以及最后一问应该询问正确做法的。<br>最后结果是没能通过，有一点点可惜吧。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝咖啡<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -226,125 +193,33 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">决策树</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CART</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">scikit-learn</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/03/14/面试记录——微众银行数据分析/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/03/26/数据分析笔记：爬虫/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据分析笔记：爬虫
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/03/07/TEST-TEST-TEST/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">TEST TEST TEST</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -367,9 +242,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
