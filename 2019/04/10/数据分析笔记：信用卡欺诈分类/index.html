@@ -6,19 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//gongls.me">
-  <title>Archives | Gongls</title>
+  <title>数据分析笔记：信用卡欺诈分类 | Gongls</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Of Course I Still Love You">
-<meta name="keywords" content="Python;DataScience;ML">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Gongls">
-<meta property="og:url" content="//gongls.me/archives/page/2/index.html">
+  <meta name="description" content="相较于信用卡违约，信用卡欺诈的比例更小，但危害极大，如何通过以往的交易数据分析出每笔交易是否正常，是否存在盗刷风险是这次项目的目标。信用卡欺诈数据来自Kaggle数据集, 除交易时间 Time，金额 Amount 和分类标签 Class 之外，其余字段已脱敏。具体代码见GitHub.">
+<meta name="keywords" content="数据分析,逻辑回归,LR,过采样,SMOTE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析笔记：信用卡欺诈分类">
+<meta property="og:url" content="//gongls.me/2019/04/10/数据分析笔记：信用卡欺诈分类/index.html">
 <meta property="og:site_name" content="Gongls">
-<meta property="og:description" content="Of Course I Still Love You">
+<meta property="og:description" content="相较于信用卡违约，信用卡欺诈的比例更小，但危害极大，如何通过以往的交易数据分析出每笔交易是否正常，是否存在盗刷风险是这次项目的目标。信用卡欺诈数据来自Kaggle数据集, 除交易时间 Time，金额 Amount 和分类标签 Class 之外，其余字段已脱敏。具体代码见GitHub.">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="//gongls.me/images/sigmoid.png">
+<meta property="og:image" content="//gongls.me/images/creditfraud2.png">
+<meta property="og:image" content="//gongls.me/images/oversample.png">
+<meta property="og:image" content="//gongls.me/images/creditfraud3.png">
+<meta property="og:image" content="//gongls.me/images/creditfraud1.png">
+<meta property="og:updated_time" content="2019-04-10T06:19:30.415Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Gongls">
-<meta name="twitter:description" content="Of Course I Still Love You">
+<meta name="twitter:title" content="数据分析笔记：信用卡欺诈分类">
+<meta name="twitter:description" content="相较于信用卡违约，信用卡欺诈的比例更小，但危害极大，如何通过以往的交易数据分析出每笔交易是否正常，是否存在盗刷风险是这次项目的目标。信用卡欺诈数据来自Kaggle数据集, 除交易时间 Time，金额 Amount 和分类标签 Class 之外，其余字段已脱敏。具体代码见GitHub.">
+<meta name="twitter:image" content="//gongls.me/images/sigmoid.png">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -154,79 +161,220 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-数据分析笔记：信用卡欺诈分类" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/07/TEST-TEST-TEST/" class="archive-article-date">
-  	<time datetime="2019-03-07T14:02:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-07</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/07/TEST-TEST-TEST/">TEST TEST TEST</a>
+    <h1 class="article-title" itemprop="name">
+      数据分析笔记：信用卡欺诈分类
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/07/hello-world/" class="archive-article-date">
-  	<time datetime="2019-03-07T12:51:15.875Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-07</time>
+        
+        <a href="/2019/04/10/数据分析笔记：信用卡欺诈分类/" class="archive-article-date">
+  	<time datetime="2019-04-10T03:05:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-10</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/07/hello-world/">Hello World</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>相较于信用卡违约，信用卡欺诈的比例更小，但危害极大，如何通过以往的交易数据分析出每笔交易是否正常，是否存在盗刷风险是这次项目的目标。<br>信用卡欺诈数据来自<a href="https://www.kaggle.com/jacklizhi/creditcard" target="_blank" rel="noopener">Kaggle数据集</a>, 除交易时间 Time，金额 Amount 和分类标签 Class 之外，其余字段已脱敏。具体代码见<a href="https://github.com/NOP2018/creditcard_fraud/tree/master" target="_blank" rel="noopener">GitHub</a>.<br><a id="more"></a></p>
+<h2 id="构建逻辑回归分类器"><a href="#构建逻辑回归分类器" class="headerlink" title="构建逻辑回归分类器"></a>构建逻辑回归分类器</h2><p>逻辑回归算法主要用于解决二分类问题，在逻辑回归中使用 Logistic 函数，也成为 Sigmoid 函数，g(z)=1/(1+e^-z)，函数的图像如下所示：<br><img src="/images/sigmoid.png" alt><br>当我们要实现一个二分类任务，0为不发生，1为发生，给定历史数据 x 和 y，通过历史样本的学习，可以得到一个模型来针对新的特征预测出 y，这里我们得到的是一个预测的概率，通常是0%和100%的中间取值，那么我们就可以认为当概率大于50%的时候为正例，小于50%的时候为负例。这就完成了二分类的预测。<br>在 sklearn 中，我们使用 LogisticRegression() 函数构建逻辑回归分类器，函数中有一些常用的参数需要注意：</p>
+<ol>
+<li>penalty: 惩罚项，取值为 l1 或 l2，默认为 l2，其实也就是正则化;</li>
+<li>solver: 代表逻辑回归损失函数的优化方法，有五个取值，分别为 liblinear,lbfgs,newton-cg,sag,saga. 默认为 liblinear，适用于数据量小的数据集，大的数据集则可以选用 sag 或 saga;</li>
+<li>max_iter: 算法收敛的最大迭代次数，默认为10;</li>
+<li>n_jobs: 拟合和预测时 CPU 的核数，默认是1，可以根据计算机的核数设定，如计算机为4核 CPU，则可以设此参数为4，可加快运行的速度。</li>
+</ol>
+<p>创建好分类器之后，就可使用 fit，predict 函数拟合和预测。</p>
+<h2 id="模型评估指标"><a href="#模型评估指标" class="headerlink" title="模型评估指标"></a>模型评估指标</h2><p>通常采用准确率对模型进行评估，但当样本标签严重不平衡时，准确率很难反应模型的优劣。<br>例如，对恐怖分子进行判断，生活中恐怖分子的比例极低，就算模型没能识别出一个恐怖分子，也会得到非常高的准确率，因为准确率的评判标准是正确分类样本个数与总样本数的比例，而判断非恐怖分子是非常容易的，导致准确率高。<br>在数据预测中，有四种情况出现： </p>
+<ol>
+<li>TP: 样本为正，预测为正</li>
+<li>FP: 样本为正，预测为负</li>
+<li>TN: 样本为负，预测为负</li>
+<li>FN: 样本为负，预测为正</li>
+</ol>
+<p>准确率 accuracy= (TP+TN)/(TP+TN+FP+FN)。<br>实际上，对于不平衡的情况，有两个指标非常重要，分别是精确率和召回率。<br>精确率 precision=TP/(TP+FP)，对应恐怖分子的例子，在所有判断为恐怖分子的人数中真正为恐怖分子的比例。<br>召回率 recall=TP/(TP+FN)，也称查全率，代表恐怖分子被正确识别出来的个数与恐怖分子总数的比例。<br>另外有一个指标综合了精确率和召回率，可以更好地评估模型的好坏，F1 score：F1=2 x precision x recall/(precision+recall).</p>
+<h2 id="信用卡欺诈分类"><a href="#信用卡欺诈分类" class="headerlink" title="信用卡欺诈分类"></a>信用卡欺诈分类</h2><p>数据集包含了2013年9月份两天时间内的信用卡交易数据，284807笔交易中，有492笔是欺诈行为。字段中 V1-V28 是已经经过 PCA 处理过的数据。</p>
+<h3 id="观察数据"><a href="#观察数据" class="headerlink" title="观察数据"></a>观察数据</h3><p>首先查看一下欺诈数据的分布情况：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置 plt 正确显示中文</span></span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]</span><br><span class="line"><span class="comment"># 绘制类别分布</span></span><br><span class="line">plt.figure()</span><br><span class="line">ax = sns.countplot(x = <span class="string">'Class'</span>, data = data)</span><br><span class="line">plt.title(<span class="string">'类别分布'</span>)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment"># 显示交易笔数，欺诈交易笔数</span></span><br><span class="line">num = len(data)</span><br><span class="line">num_fraud = len(data[data[<span class="string">'Class'</span>]==<span class="number">1</span>]) </span><br><span class="line">print(<span class="string">'总交易笔数: '</span>, num)</span><br><span class="line">print(<span class="string">'诈骗交易笔数：'</span>, num_fraud)</span><br><span class="line">print(<span class="string">'诈骗交易比例：&#123;:.6f&#125;'</span>.format(num_fraud/num))</span><br></pre></td></tr></table></figure>
+<p><img src="/images/creditfraud2.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">总交易笔数:  <span class="number">284807</span></span><br><span class="line">诈骗交易笔数： <span class="number">492</span></span><br><span class="line">诈骗交易比例：<span class="number">0.001727</span></span><br></pre></td></tr></table></figure>
+<p>可以看到样本标签0，1分布极度不平衡。针对不平衡数据通常有两种处理方法：</p>
+<ol>
+<li>过采样（让1变得和0一样多）</li>
+<li>欠采样（从0中取出部分数据，数量与1一致）<br>这里将采用过采样的方法，会用到 imblearn 包中 SMOTE 方法。首先需要安装 imblearn:</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用pip</span></span><br><span class="line">pip install -U imbalanced-learn</span><br><span class="line"><span class="comment"># 使用 anaconda</span></span><br><span class="line">conda install -c glemaitre imbalanced-learn</span><br><span class="line"><span class="comment"># 调用方法</span></span><br><span class="line"><span class="keyword">from</span> imblearn.over_sampling <span class="keyword">import</span> SMOTE</span><br></pre></td></tr></table></figure>
+<h3 id="标准化"><a href="#标准化" class="headerlink" title="标准化"></a>标准化</h3><p>特征数据中， Amount与其他特征的取值范围相比太大，需要进行标准化：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对 Amount 进行数据规范化</span></span><br><span class="line">data[<span class="string">'Amount_Norm'</span>] = StandardScaler().fit_transform(data[<span class="string">'Amount'</span>].values.reshape(<span class="number">-1</span>,<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 特征选择</span></span><br><span class="line">x = data.drop([<span class="string">'Time'</span>,<span class="string">'Class'</span>],axis=<span class="number">1</span>)</span><br><span class="line">y = data[<span class="string">'Class'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h3><p>如果不进行其他处理，直接使用逻辑回归进行分类，可以得到以下运行结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">精确率: <span class="number">0.841</span></span><br><span class="line">召回率: <span class="number">0.617</span></span><br><span class="line">F1 值: <span class="number">0.712</span></span><br></pre></td></tr></table></figure>
+<p>可见得分比较平均，但召回率较低，意味着将会有比较多的欺诈数据没能被正确识别出来，也就是被识别为非欺诈。通常需要尽可能地将所有信用卡欺诈数据找出来，也就是说，我们需要更高的召回率。<br>下面使用过采样方法尝试。</p>
+<h3 id="过采样策略"><a href="#过采样策略" class="headerlink" title="过采样策略"></a>过采样策略</h3><p>过采样的思路是这样的：<br><img src="/images/oversample.png" alt><br>其中其中k值为要翻的倍数，假设少数类样本为100，你想变成500，K就取5。先算x到其他少数类样本的距离，然后找出离它最近的5个样本，分别得到距离，将这个距离乘上一个0-1之间的随机数，加上样本本身，得到新数据。相当于对样本进行了微调的过程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成过采样新数据</span></span><br><span class="line">oversampler = SMOTE(random_state=<span class="number">0</span>)</span><br><span class="line">os_x,os_y = oversampler.fit_sample(train_x,train_y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看过采样后的欺诈数据</span></span><br><span class="line">len(os_y[os_y==<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">os_x = pd.DataFrame(os_x)</span><br><span class="line">os_y = pd.DataFrame(os_y)</span><br><span class="line"><span class="comment"># 逻辑回归分类</span></span><br><span class="line">clf = LogisticRegression()</span><br><span class="line">clf.fit(os_x, os_y)</span><br><span class="line">predict_y = clf.predict(test_x)</span><br><span class="line"><span class="comment"># 预测样本的置信分数</span></span><br><span class="line">score_y = clf.decision_function(test_x)  </span><br><span class="line"><span class="comment"># 计算混淆矩阵，并显示</span></span><br><span class="line">cm = confusion_matrix(test_y, predict_y)</span><br><span class="line">class_names = [<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 显示混淆矩阵</span></span><br><span class="line">plot_confusion_matrix(cm, classes = class_names, title = <span class="string">'逻辑回归 混淆矩阵'</span>)</span><br><span class="line"><span class="comment"># 显示模型评估分数</span></span><br><span class="line">show_metrics()</span><br><span class="line"><span class="comment"># 计算精确率，召回率，阈值用于可视化</span></span><br><span class="line">precision, recall, thresholds = precision_recall_curve(test_y, score_y)</span><br><span class="line">plot_precision_recall()</span><br></pre></td></tr></table></figure>
+<p>最终的运行结果为：<br><img src="/images/creditfraud3.png" alt><br><img src="/images/creditfraud1.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">精确率: <span class="number">0.088</span></span><br><span class="line">召回率: <span class="number">0.913</span></span><br><span class="line">F1 值: <span class="number">0.161</span></span><br></pre></td></tr></table></figure>
+<p>可以看到召回率有了很大的提升，但精确率和 F1 得分变得很低。可以采用欠采样进行更多的尝试，看看结果如何。<br>欠采样参考 <a href="https://blog.csdn.net/hx2017/article/details/78389376" target="_blank" rel="noopener">CSDN博文</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在信用卡欺诈的分类中，使用过采样的方法可以解决不平衡的问题，提高召回率，能较好得识别出欺诈数据，但其他指标则较低，可能会误杀非欺诈数据，这里就需要进行一个权衡。<br>实际业务中，要根据业务需求，决定最关键的指标，再进行相对应的处理策略进行处理。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝咖啡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据分析</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">逻辑回归</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">LR</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">过采样</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SMOTE</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/04/10/数据分析笔记：信用卡欺诈分类/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/04/06/数据分析笔记：决策树/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据分析笔记：决策树</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -250,8 +398,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
