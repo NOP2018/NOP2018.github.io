@@ -6,25 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//gongls.me">
-  <title>数据分析笔记：决策树(二) | Gongls</title>
+  <title>Tag: 文档分类 | Gongls</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CART 算法，全称为 Classification And Regression Tree, 也就是分类回归树，采用基尼系数作属性选择。ID3 和 C4.5 算法可以生成二叉树或多叉树，而 CART 算法只支持二叉树，同时 CART 既可以用作分类树，也可以用作回归树。">
-<meta name="keywords" content="数据分析,决策树,CART,scikit-learn">
-<meta property="og:type" content="article">
-<meta property="og:title" content="数据分析笔记：决策树(二)">
-<meta property="og:url" content="//gongls.me/2019/04/10/数据分析笔记：决策树-二/index.html">
+  <meta name="description" content="Of Course I Still Love You">
+<meta name="keywords" content="Python;DataScience;ML">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gongls">
+<meta property="og:url" content="//gongls.me/tags/文档分类/index.html">
 <meta property="og:site_name" content="Gongls">
-<meta property="og:description" content="CART 算法，全称为 Classification And Regression Tree, 也就是分类回归树，采用基尼系数作属性选择。ID3 和 C4.5 算法可以生成二叉树或多叉树，而 CART 算法只支持二叉树，同时 CART 既可以用作分类树，也可以用作回归树。">
+<meta property="og:description" content="Of Course I Still Love You">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="//gongls.me/images/cart1.png">
-<meta property="og:image" content="//gongls.me/images/cart2.jpg">
-<meta property="og:image" content="//gongls.me/images/cart3.png">
-<meta property="og:image" content="//gongls.me/images/cart4.png">
-<meta property="og:updated_time" content="2019-04-10T13:44:53.110Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据分析笔记：决策树(二)">
-<meta name="twitter:description" content="CART 算法，全称为 Classification And Regression Tree, 也就是分类回归树，采用基尼系数作属性选择。ID3 和 C4.5 算法可以生成二叉树或多叉树，而 CART 算法只支持二叉树，同时 CART 既可以用作分类树，也可以用作回归树。">
-<meta name="twitter:image" content="//gongls.me/images/cart1.png">
+<meta name="twitter:title" content="Gongls">
+<meta name="twitter:description" content="Of Course I Still Love You">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -160,66 +154,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-数据分析笔记：决策树-二" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      数据分析笔记：决策树(二)
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/04/11/数据分析笔记：朴素贝叶斯/" class="archive-article-date">
+  	<time datetime="2019-04-11T02:04:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-11</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/04/11/数据分析笔记：朴素贝叶斯/">数据分析笔记：朴素贝叶斯</a>
     </h1>
   
 
-        
-        <a href="/2019/04/10/数据分析笔记：决策树-二/" class="archive-article-date">
-  	<time datetime="2019-04-10T09:23:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>CART 算法，全称为 Classification And Regression Tree, 也就是分类回归树，采用基尼系数作属性选择。ID3 和 C4.5 算法可以生成二叉树或多叉树，而 CART 算法只支持二叉树，同时 CART 既可以用作分类树，也可以用作回归树。<br><a id="more"></a></p>
-<h2 id="CART-分类树的工作流程"><a href="#CART-分类树的工作流程" class="headerlink" title="CART 分类树的工作流程"></a>CART 分类树的工作流程</h2><p>CART 算法在构造分类树的时候，选择基尼系数最小的属性作为属性的划分。<br>某个节点 t 的基尼系数计算公式为：<br><img src="/images/cart1.png" alt><br>这里 p(Ck|t) 表示节点 t 属于类别 Ck 的概率，节点 t 的基尼系数为1减去各类别 Ck 概率的平方和。<br>依然以打篮球为例，集合1为6个都去打篮球，集合2为3个去打篮球，3个不打，那么针对集合1，p(Ck|t)=1，则 GINI(t)=1-1=0；针对集合2，p(C1|t)=0.5，p(C2|t)=0.5，GINI(t)=1-(0.5x0.5+0.5x0.5)=0.5。<br>通过两个基尼系数可以看出，集合1的基尼系数小，证明样本最稳定。<br>假设属性 A 将节点 D 划分成 D1 和 D2 ，如下图：<br><img src="/images/cart2.jpg" alt><br>节点 D 的基尼系数等于子节点的归一化基尼系数之和：<br><img src="/images/cart3.png" alt><br>根据上面的计算结果，可以计算节点 D 的基尼系数为0.25.<br>节点 D 被属性 A 划分后的基尼系数越大，样本集合的不确定性越大，即不纯度越高。</p>
-<h2 id="使用-CART-创建分类树"><a href="#使用-CART-创建分类树" class="headerlink" title="使用 CART 创建分类树"></a>使用 CART 创建分类树</h2><p>在 sklearn 中，可以直接使用 DecisionTreeClassifier 这个类来创建 CART 分类树。创建这个类的时候，默认其 criterion 参数等于 gini，即默认采用的是 CART 算法。<br>以 sklearn 自带鸢尾花数据集为例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="comment"># 准备数据集</span></span><br><span class="line">iris=load_iris()</span><br><span class="line"><span class="comment"># 获取特征集和分类标识</span></span><br><span class="line">features = iris.data</span><br><span class="line">labels = iris.target</span><br><span class="line"><span class="comment"># 随机抽取 33% 的数据作为测试集，其余为训练集</span></span><br><span class="line">train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=<span class="number">0.33</span>, random_state=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># 创建 CART 分类树</span></span><br><span class="line">clf = DecisionTreeClassifier(criterion=<span class="string">'gini'</span>)</span><br><span class="line"><span class="comment"># 拟合构造 CART 分类树</span></span><br><span class="line">clf = clf.fit(train_features, train_labels)</span><br><span class="line"><span class="comment"># 用 CART 分类树做预测</span></span><br><span class="line">test_predict = clf.predict(test_features)</span><br><span class="line"><span class="comment"># 预测结果与测试集结果作比对</span></span><br><span class="line">score = accuracy_score(test_labels, test_predict)</span><br><span class="line">print(<span class="string">"CART 分类树准确率 %.4lf"</span> % score)</span><br></pre></td></tr></table></figure>
-<p>可以得到分类准确率为 0.9600。</p>
-<h2 id="CART-回归树的工作流程"><a href="#CART-回归树的工作流程" class="headerlink" title="CART 回归树的工作流程"></a>CART 回归树的工作流程</h2><p>在 CART 回归树中，采用样本的离散程度来评价不纯度，其计算方式是，先计算所有样本的均值，然后计算每个样本到均值的差值，最后可以取差值的绝对值，或者方差。<br>差值绝对值和方差这两种标准，分别对应两种目标函数最优化的标准，即用最小绝对偏差(LAD)，或最小二乘偏差(LSD)，LSD 比较常见。</p>
-<h2 id="使用-CART-回归树做预测"><a href="#使用-CART-回归树做预测" class="headerlink" title="使用 CART 回归树做预测"></a>使用 CART 回归树做预测</h2><p>使用 sklearn 自带的波士顿房价数据集：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_boston</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> r2_score,mean_absolute_error,mean_squared_error</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeRegressor</span><br><span class="line"><span class="comment"># 准备数据集</span></span><br><span class="line">boston=load_boston()</span><br><span class="line"><span class="comment"># 探索数据</span></span><br><span class="line">print(boston.feature_names)</span><br><span class="line"><span class="comment"># 获取特征集和房价</span></span><br><span class="line">features = boston.data</span><br><span class="line">prices = boston.target</span><br><span class="line"><span class="comment"># 随机抽取 33% 的数据作为测试集，其余为训练集</span></span><br><span class="line">train_features, test_features, train_price, test_price = train_test_split(features, prices, test_size=<span class="number">0.33</span>)</span><br><span class="line"><span class="comment"># 创建 CART 回归树</span></span><br><span class="line">dtr=DecisionTreeRegressor()</span><br><span class="line"><span class="comment"># 拟合构造 CART 回归树</span></span><br><span class="line">dtr.fit(train_features, train_price)</span><br><span class="line"><span class="comment"># 预测测试集中的房价</span></span><br><span class="line">predict_price = dtr.predict(test_features)</span><br><span class="line"><span class="comment"># 测试集的结果评价</span></span><br><span class="line">print(<span class="string">'回归树二乘偏差均值:'</span>, mean_squared_error(test_price, predict_price))</span><br><span class="line">print(<span class="string">'回归树绝对值偏差均值:'</span>, mean_absolute_error(test_price, predict_price))</span><br></pre></td></tr></table></figure>
-<p>运行结果：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'CRIM'</span> <span class="string">'ZN'</span> <span class="string">'INDUS'</span> <span class="string">'CHAS'</span> <span class="string">'NOX'</span> <span class="string">'RM'</span> <span class="string">'AGE'</span> <span class="string">'DIS'</span> <span class="string">'RAD'</span> <span class="string">'TAX'</span> <span class="string">'PTRATIO'</span> <span class="string">'B'</span> <span class="string">'LSTAT'</span>]</span><br><span class="line">回归树二乘偏差均值: <span class="number">23.80784431137724</span></span><br><span class="line">回归树绝对值偏差均值: <span class="number">3.040119760479042</span></span><br></pre></td></tr></table></figure>
-<h2 id="CART-决策树的剪枝"><a href="#CART-决策树的剪枝" class="headerlink" title="CART 决策树的剪枝"></a>CART 决策树的剪枝</h2><p>CART 决策树的剪枝主要采用 CCP 方法，它是一种后剪枝方法，中文为代价复杂度。其用到一个指标叫做节点的表面误差率增益值：<br><img src="/images/cart4.png" alt><br>其中 Tt 代表以 t 为根节点的子树，C(Tt) 表示节点 t 的子树没被裁剪时子树 Tt 的误差，C(t) 表示节点 t 的子树被剪枝后节点 t 的误差,|Tt|代子树 Tt 的叶子数，剪枝后，T 的叶子数减少了|Tt|-1。<br>所以节点的表面误差率增益值等于节点 t 的子树被剪枝后的误差变化除以剪掉的叶子数量。<br>需要找的就是最小 α 值对应的节点，把它剪掉，这时生成了第一个子树，重复上面的过程，继续剪枝，直到最后只剩下根节点，即为最后一个子树。<br>得到子树集合后，用验证集对所有子树的误差计算一边，可以通过计算每个子树的基尼系数或平方误差，取误差最小的那个树，得到我们想要的结果。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝咖啡<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -229,129 +193,37 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">决策树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CART</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">scikit-learn</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">朴素贝叶斯</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文档分类</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">jieba</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/04/10/数据分析笔记：决策树-二/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/04/11/数据分析笔记：朴素贝叶斯/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据分析笔记：朴素贝叶斯
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/04/10/数据分析笔记：信用卡欺诈分类/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据分析笔记：信用卡欺诈分类</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -374,9 +246,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -6,25 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="//gongls.me">
-  <title>数据分析笔记：决策树(二) | Gongls</title>
+  <title>数据分析笔记：朴素贝叶斯 | Gongls</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="CART 算法，全称为 Classification And Regression Tree, 也就是分类回归树，采用基尼系数作属性选择。ID3 和 C4.5 算法可以生成二叉树或多叉树，而 CART 算法只支持二叉树，同时 CART 既可以用作分类树，也可以用作回归树。">
-<meta name="keywords" content="数据分析,决策树,CART,scikit-learn">
+  <meta name="description" content="假设有一种病 X 的发病率是万分之一，也就是一万个人中会有一人患病，现有一种测试可以检验一个是否得病的准确率是99.9%，误判率是0.1%，那么如果一个人被查出来患有此病，他实际的确患病的可能性有多大？在10000个人中，存在0.1%的误判，即会有10个人没有患病但是被诊断成患病，同时在这10000个人中存在一个真实患病的人，他有99.9%的概率被检查出来，所以患者实际上是10+1=11人中的一个">
+<meta name="keywords" content="数据分析,scikit-learn,朴素贝叶斯,文档分类,jieba">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据分析笔记：决策树(二)">
-<meta property="og:url" content="//gongls.me/2019/04/10/数据分析笔记：决策树-二/index.html">
+<meta property="og:title" content="数据分析笔记：朴素贝叶斯">
+<meta property="og:url" content="//gongls.me/2019/04/11/数据分析笔记：朴素贝叶斯/index.html">
 <meta property="og:site_name" content="Gongls">
-<meta property="og:description" content="CART 算法，全称为 Classification And Regression Tree, 也就是分类回归树，采用基尼系数作属性选择。ID3 和 C4.5 算法可以生成二叉树或多叉树，而 CART 算法只支持二叉树，同时 CART 既可以用作分类树，也可以用作回归树。">
+<meta property="og:description" content="假设有一种病 X 的发病率是万分之一，也就是一万个人中会有一人患病，现有一种测试可以检验一个是否得病的准确率是99.9%，误判率是0.1%，那么如果一个人被查出来患有此病，他实际的确患病的可能性有多大？在10000个人中，存在0.1%的误判，即会有10个人没有患病但是被诊断成患病，同时在这10000个人中存在一个真实患病的人，他有99.9%的概率被检查出来，所以患者实际上是10+1=11人中的一个">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="//gongls.me/images/cart1.png">
-<meta property="og:image" content="//gongls.me/images/cart2.jpg">
-<meta property="og:image" content="//gongls.me/images/cart3.png">
-<meta property="og:image" content="//gongls.me/images/cart4.png">
-<meta property="og:updated_time" content="2019-04-10T13:44:53.110Z">
+<meta property="og:image" content="//gongls.me/images/nb1.jpg">
+<meta property="og:image" content="//gongls.me/images/nb2.png">
+<meta property="og:image" content="//gongls.me/images/nb3.png">
+<meta property="og:image" content="//gongls.me/images/nb4.png">
+<meta property="og:image" content="//gongls.me/images/nb5.png">
+<meta property="og:updated_time" content="2019-04-11T05:36:14.150Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据分析笔记：决策树(二)">
-<meta name="twitter:description" content="CART 算法，全称为 Classification And Regression Tree, 也就是分类回归树，采用基尼系数作属性选择。ID3 和 C4.5 算法可以生成二叉树或多叉树，而 CART 算法只支持二叉树，同时 CART 既可以用作分类树，也可以用作回归树。">
-<meta name="twitter:image" content="//gongls.me/images/cart1.png">
+<meta name="twitter:title" content="数据分析笔记：朴素贝叶斯">
+<meta name="twitter:description" content="假设有一种病 X 的发病率是万分之一，也就是一万个人中会有一人患病，现有一种测试可以检验一个是否得病的准确率是99.9%，误判率是0.1%，那么如果一个人被查出来患有此病，他实际的确患病的可能性有多大？在10000个人中，存在0.1%的误判，即会有10个人没有患病但是被诊断成患病，同时在这10000个人中存在一个真实患病的人，他有99.9%的概率被检查出来，所以患者实际上是10+1=11人中的一个">
+<meta name="twitter:image" content="//gongls.me/images/nb1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -160,37 +161,92 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-数据分析笔记：决策树-二" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-数据分析笔记：朴素贝叶斯" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      数据分析笔记：决策树(二)
+      数据分析笔记：朴素贝叶斯
     </h1>
   
 
         
-        <a href="/2019/04/10/数据分析笔记：决策树-二/" class="archive-article-date">
-  	<time datetime="2019-04-10T09:23:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-10</time>
+        <a href="/2019/04/11/数据分析笔记：朴素贝叶斯/" class="archive-article-date">
+  	<time datetime="2019-04-11T02:04:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>CART 算法，全称为 Classification And Regression Tree, 也就是分类回归树，采用基尼系数作属性选择。ID3 和 C4.5 算法可以生成二叉树或多叉树，而 CART 算法只支持二叉树，同时 CART 既可以用作分类树，也可以用作回归树。<br><a id="more"></a></p>
-<h2 id="CART-分类树的工作流程"><a href="#CART-分类树的工作流程" class="headerlink" title="CART 分类树的工作流程"></a>CART 分类树的工作流程</h2><p>CART 算法在构造分类树的时候，选择基尼系数最小的属性作为属性的划分。<br>某个节点 t 的基尼系数计算公式为：<br><img src="/images/cart1.png" alt><br>这里 p(Ck|t) 表示节点 t 属于类别 Ck 的概率，节点 t 的基尼系数为1减去各类别 Ck 概率的平方和。<br>依然以打篮球为例，集合1为6个都去打篮球，集合2为3个去打篮球，3个不打，那么针对集合1，p(Ck|t)=1，则 GINI(t)=1-1=0；针对集合2，p(C1|t)=0.5，p(C2|t)=0.5，GINI(t)=1-(0.5x0.5+0.5x0.5)=0.5。<br>通过两个基尼系数可以看出，集合1的基尼系数小，证明样本最稳定。<br>假设属性 A 将节点 D 划分成 D1 和 D2 ，如下图：<br><img src="/images/cart2.jpg" alt><br>节点 D 的基尼系数等于子节点的归一化基尼系数之和：<br><img src="/images/cart3.png" alt><br>根据上面的计算结果，可以计算节点 D 的基尼系数为0.25.<br>节点 D 被属性 A 划分后的基尼系数越大，样本集合的不确定性越大，即不纯度越高。</p>
-<h2 id="使用-CART-创建分类树"><a href="#使用-CART-创建分类树" class="headerlink" title="使用 CART 创建分类树"></a>使用 CART 创建分类树</h2><p>在 sklearn 中，可以直接使用 DecisionTreeClassifier 这个类来创建 CART 分类树。创建这个类的时候，默认其 criterion 参数等于 gini，即默认采用的是 CART 算法。<br>以 sklearn 自带鸢尾花数据集为例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="comment"># 准备数据集</span></span><br><span class="line">iris=load_iris()</span><br><span class="line"><span class="comment"># 获取特征集和分类标识</span></span><br><span class="line">features = iris.data</span><br><span class="line">labels = iris.target</span><br><span class="line"><span class="comment"># 随机抽取 33% 的数据作为测试集，其余为训练集</span></span><br><span class="line">train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=<span class="number">0.33</span>, random_state=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># 创建 CART 分类树</span></span><br><span class="line">clf = DecisionTreeClassifier(criterion=<span class="string">'gini'</span>)</span><br><span class="line"><span class="comment"># 拟合构造 CART 分类树</span></span><br><span class="line">clf = clf.fit(train_features, train_labels)</span><br><span class="line"><span class="comment"># 用 CART 分类树做预测</span></span><br><span class="line">test_predict = clf.predict(test_features)</span><br><span class="line"><span class="comment"># 预测结果与测试集结果作比对</span></span><br><span class="line">score = accuracy_score(test_labels, test_predict)</span><br><span class="line">print(<span class="string">"CART 分类树准确率 %.4lf"</span> % score)</span><br></pre></td></tr></table></figure>
-<p>可以得到分类准确率为 0.9600。</p>
-<h2 id="CART-回归树的工作流程"><a href="#CART-回归树的工作流程" class="headerlink" title="CART 回归树的工作流程"></a>CART 回归树的工作流程</h2><p>在 CART 回归树中，采用样本的离散程度来评价不纯度，其计算方式是，先计算所有样本的均值，然后计算每个样本到均值的差值，最后可以取差值的绝对值，或者方差。<br>差值绝对值和方差这两种标准，分别对应两种目标函数最优化的标准，即用最小绝对偏差(LAD)，或最小二乘偏差(LSD)，LSD 比较常见。</p>
-<h2 id="使用-CART-回归树做预测"><a href="#使用-CART-回归树做预测" class="headerlink" title="使用 CART 回归树做预测"></a>使用 CART 回归树做预测</h2><p>使用 sklearn 自带的波士顿房价数据集：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_boston</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> r2_score,mean_absolute_error,mean_squared_error</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeRegressor</span><br><span class="line"><span class="comment"># 准备数据集</span></span><br><span class="line">boston=load_boston()</span><br><span class="line"><span class="comment"># 探索数据</span></span><br><span class="line">print(boston.feature_names)</span><br><span class="line"><span class="comment"># 获取特征集和房价</span></span><br><span class="line">features = boston.data</span><br><span class="line">prices = boston.target</span><br><span class="line"><span class="comment"># 随机抽取 33% 的数据作为测试集，其余为训练集</span></span><br><span class="line">train_features, test_features, train_price, test_price = train_test_split(features, prices, test_size=<span class="number">0.33</span>)</span><br><span class="line"><span class="comment"># 创建 CART 回归树</span></span><br><span class="line">dtr=DecisionTreeRegressor()</span><br><span class="line"><span class="comment"># 拟合构造 CART 回归树</span></span><br><span class="line">dtr.fit(train_features, train_price)</span><br><span class="line"><span class="comment"># 预测测试集中的房价</span></span><br><span class="line">predict_price = dtr.predict(test_features)</span><br><span class="line"><span class="comment"># 测试集的结果评价</span></span><br><span class="line">print(<span class="string">'回归树二乘偏差均值:'</span>, mean_squared_error(test_price, predict_price))</span><br><span class="line">print(<span class="string">'回归树绝对值偏差均值:'</span>, mean_absolute_error(test_price, predict_price))</span><br></pre></td></tr></table></figure>
-<p>运行结果：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'CRIM'</span> <span class="string">'ZN'</span> <span class="string">'INDUS'</span> <span class="string">'CHAS'</span> <span class="string">'NOX'</span> <span class="string">'RM'</span> <span class="string">'AGE'</span> <span class="string">'DIS'</span> <span class="string">'RAD'</span> <span class="string">'TAX'</span> <span class="string">'PTRATIO'</span> <span class="string">'B'</span> <span class="string">'LSTAT'</span>]</span><br><span class="line">回归树二乘偏差均值: <span class="number">23.80784431137724</span></span><br><span class="line">回归树绝对值偏差均值: <span class="number">3.040119760479042</span></span><br></pre></td></tr></table></figure>
-<h2 id="CART-决策树的剪枝"><a href="#CART-决策树的剪枝" class="headerlink" title="CART 决策树的剪枝"></a>CART 决策树的剪枝</h2><p>CART 决策树的剪枝主要采用 CCP 方法，它是一种后剪枝方法，中文为代价复杂度。其用到一个指标叫做节点的表面误差率增益值：<br><img src="/images/cart4.png" alt><br>其中 Tt 代表以 t 为根节点的子树，C(Tt) 表示节点 t 的子树没被裁剪时子树 Tt 的误差，C(t) 表示节点 t 的子树被剪枝后节点 t 的误差,|Tt|代子树 Tt 的叶子数，剪枝后，T 的叶子数减少了|Tt|-1。<br>所以节点的表面误差率增益值等于节点 t 的子树被剪枝后的误差变化除以剪掉的叶子数量。<br>需要找的就是最小 α 值对应的节点，把它剪掉，这时生成了第一个子树，重复上面的过程，继续剪枝，直到最后只剩下根节点，即为最后一个子树。<br>得到子树集合后，用验证集对所有子树的误差计算一边，可以通过计算每个子树的基尼系数或平方误差，取误差最小的那个树，得到我们想要的结果。</p>
+        <p><img src="/images/nb1.jpg" alt><br>假设有一种病 X 的发病率是万分之一，也就是一万个人中会有一人患病，现有一种测试可以检验一个是否得病的准确率是99.9%，误判率是0.1%，那么如果一个人被查出来患有此病，他实际的确患病的可能性有多大？<br>在10000个人中，存在0.1%的误判，即会有10个人没有患病但是被诊断成患病，同时在这10000个人中存在一个真实患病的人，他有99.9%的概率被检查出来，所以患者实际上是10+1=11人中的一个，亦即实际患病的比例是1/11。<br>这个例子中，涉及到贝叶斯原理中的一些概念：<br><a id="more"></a></p>
+<h2 id="贝叶斯原理"><a href="#贝叶斯原理" class="headerlink" title="贝叶斯原理"></a>贝叶斯原理</h2><h3 id="先验概率"><a href="#先验概率" class="headerlink" title="先验概率"></a>先验概率</h3><p>通过经验来判断事情发生的概率，比如 X 的发病率是万分之一就是先验概率。</p>
+<h3 id="后验概率"><a href="#后验概率" class="headerlink" title="后验概率"></a>后验概率</h3><p>就是在事情发生之后，推测原因的概率，比如某人诊断出患病，那么患病的原因可能是 A,B,C，患病是因为原因 A 的概率就是后验概率。后验概率属于条件概率。</p>
+<h3 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h3><p>事件 A 在另一个事件 B 已经发生的条件下的发生概率，表示为 P(A|B)。</p>
+<h3 id="似然函数（likelihood）"><a href="#似然函数（likelihood）" class="headerlink" title="似然函数（likelihood）"></a>似然函数（likelihood）</h3><p>可以把概率模型的训练过程理解为求参数估计的过程。例如抛一枚硬币10次都是正面朝上，我们可能会猜测这个硬币是均匀的可能性是多少。这里硬币均匀就是一个参数，似然函数就是用来衡量这个模型的参数。似然就是可能性的意思。</p>
+<h3 id="贝叶斯定理"><a href="#贝叶斯定理" class="headerlink" title="贝叶斯定理"></a>贝叶斯定理</h3><p>实际上贝叶斯原理就是求解后验概率。假设 A 表示事件“诊断为患病”，B1 表示“患病”，B2 表示“没患病”，那么在患病的情况下，诊断为患病的概率为 P(A|B1)=99.9%，没有患病但诊断为患病的概率为 P(A|B2)=0.1%，此外患病的概率为 P(B1)=0.01%，没有患病概率为 P(B2)=99.99%。<br>那么被诊断为患病，实际也患病的概率 P(B1,A)=P(B1)XP(A|B1)=0.00999%。这里计算的是联合概率，同样可以得到 P(B2,A)=0.09999%。<br>然后我们就可以计算诊断为患病的条件下，实际患病的概率，即 P(B1|A)=0.01%/(0.01%+0.1%)=9%，同样可以得到 P(B2|A)=90.9%。<br>因此可总结出公式 P(Bi|A)=P(Bi,A)/(P(B1,A)+P(B2,A))。然后就可归纳出通用贝叶斯公式：<br><img src="/images/nb2.png" alt></p>
+<h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><p>朴素贝叶斯是一种简单但强大的预测建模算法，之所以称为朴素贝叶斯，是因为它假设每个输入变量是独立的。朴素贝叶斯由两种类型的概率组成：</p>
+<ol>
+<li>每个类别的概率 P(Cj)</li>
+<li>每个属性的条件概率 P(Ai|Cj)</li>
+</ol>
+<p>假设有7个球，其中3个白球，4个黑球，那么球是白的概率为3/7，黑色的概率为4/7，这个就是类别概率。<br>如果把这7个球放到两个盒子 A 和 B 中，其中 A 中有2个白球，2个黑球， B 中有1个白球，2个黑球，那么在 A 中抓到白球的概率就是1/2，抓到黑球的概率也是1/2，这个就是条件概率，也就是在某个条件（比如在 A 中）下的概率。朴素贝叶斯中，统计的是属性的条件概率，即假设取出的白球，那么它属于盒子 A 的概率 2/3。</p>
+<h2 id="朴素贝叶斯分类工作原理"><a href="#朴素贝叶斯分类工作原理" class="headerlink" title="朴素贝叶斯分类工作原理"></a>朴素贝叶斯分类工作原理</h2><h3 id="离散数据"><a href="#离散数据" class="headerlink" title="离散数据"></a>离散数据</h3><p>以下面的数据为例，给定一个新数据：身高“高”、体重“中”、鞋码“中”，这个是男是女？<br><img src="/images/nb3.png" alt><br>假设 A 代表属性，用 A1,A2,A3 分别表示身高=高、体重=中、鞋码=中。用 C 代表类别， C1,C2 分别表示男、女。<br>根据贝叶斯公式，我们需要求的就是：<br><img src="/images/nb4.png" alt><br>在这个公式中，因为 P(A1A2A3) 是固定的，我们想要寻找使公式左边的最大值，等价于求分子最大值。<br>假设 Ai 之间相互独立，那么有 P(A1A2A3|Cj)=P(A1|Cj)P(A2|Cj)P(A3|Cj)。<br>可以分别得到：P(A1|C1)=1/2, P(A2|C1)=1/2, P(A3|C1)=1/4，P(A1|C2)=0, P(A2|C2)=1/2, P(A3|C2)=1/2, 所以 P(A1A2A3|C1)=1/16, P(A1A2A3|C2)=0。<br>因为 C1 的概率大于 C2 ，可以判断为属于 C1, 即男性。</p>
+<h3 id="连续数据"><a href="#连续数据" class="headerlink" title="连续数据"></a>连续数据</h3><p><img src="/images/nb5.png" alt><br>如果给一个新数据，身高180，体重120，鞋码41，又如何分类？<br>可以假设属性呈正态分布，通过样本计算出均值和方差，得到正态分布的密度函数。比如，男性的身高是均值179.5，标准差3.597的正态分布，所以男性身高为180的概率为0.1069，可以使用 EXCEL 的 NORMDIST(x,mean,standard_dev,cumulative) 函数，其中：</p>
+<ol>
+<li>x: 需要计算的数值，比如180</li>
+<li>mean: 正态分布的均值</li>
+<li>standard_dev: 标准差</li>
+<li>cumulative: False 或 True，为 0 时，函数结果为概率密度，反之为累计分布</li>
+</ol>
+<p>可以计算 NORMDIST(180,179.5,3.679,0)=0.1069。<br>同理可以算出男性体重为120的概率为0.000382324，鞋码为41的概率为0.120304111，从而可以算出 P(A1A2A3|C1)，同理可以算出为女性的可能性 P(A1A2A3|C2)，最后对比两个概率的大小就能得出结果。</p>
+<h2 id="python-实现与文档分类"><a href="#python-实现与文档分类" class="headerlink" title="python 实现与文档分类"></a>python 实现与文档分类</h2><p>sklearn 提供了三个朴素贝叶斯分类算法：</p>
+<ol>
+<li>高斯朴素贝叶斯(GaussianNB):特征变量是连续变量，符合高斯分布</li>
+<li>多项式朴素贝叶斯(MultinomialNB):特征变量是离散变量，符合多项分布，在文档分类中体现在一个单词出现的次数，或是单词的 TF-IDF 值等</li>
+<li>伯努利朴素贝叶斯(BernoulliNB):特征变量是布尔变量，在文档分类中特征是单词是否出现</li>
+</ol>
+<h3 id="TF-IDF-值"><a href="#TF-IDF-值" class="headerlink" title="TF-IDF 值"></a>TF-IDF 值</h3><p>TF-IDF 是 Term Frequency 和 Inverse Document Frequency 的总称，分别代表词频和逆向文档频率。<br>逆向文档频率值得是一个单词在文档中的区分度。它认为一个单词出现的文档数越少，就越能通过这个单词把该文档和其他文档区分开，IDF 越大代表该单词的区分度越大。<br>TF-IDF 实际上是 TF 和 IDF 的乘积，这样我们倾向于找到 TF 和 IDF 取值都高的单词作为区分，即这个单词在一个文档中出现的次数多，同时很少出现在其他文档中，这样的单词适合于分类。<br>TF=次数/总词数，IDF=log(文档总数/该词出现的文档数+1)。</p>
+<p><strong>TF-IDF=TFxIDF</strong>。</p>
+<p>在 sklearn 中直接使用 TfidfVectorizer 类来计算 TF-IDF 向量的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TfidfVectorizer(stop_words=stop_words, token_pattern=token_pattern)</span><br></pre></td></tr></table></figure>
+<p>这里有两个构造参数，可以自定义停用词 stop_words 和规律规则 token_pattern，其中停用词是 list 类型，规则是正则表达式。<br>创建好向量类型后，用 fit_transform 来计算，返回文本矩阵。<br>例如以下四个文档：</p>
+<ol>
+<li>this is the bayes document;</li>
+<li>this is the second beyes document;</li>
+<li>and the third one;</li>
+<li>is this the document.</li>
+</ol>
+<p>首先创建 TfidfVectorizer 类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line">tfidf_vec = TfidfVectorizer()</span><br></pre></td></tr></table></figure>
+<p>然后进行拟合：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">documents = [</span><br><span class="line">    <span class="string">'this is the bayes document'</span>,</span><br><span class="line">    <span class="string">'this is the second second document'</span>,</span><br><span class="line">    <span class="string">'and the third one'</span>,</span><br><span class="line">    <span class="string">'is this the document'</span></span><br><span class="line">]</span><br><span class="line">tfidf_matrix = tfidf_vec.fit_transform(documents)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'不重复的词:'</span>, tfidf_vec.get_feature_names())</span><br><span class="line">不重复的词: [<span class="string">'and'</span>, <span class="string">'bayes'</span>, <span class="string">'document'</span>, <span class="string">'is'</span>, <span class="string">'one'</span>, <span class="string">'second'</span>, <span class="string">'the'</span>, <span class="string">'third'</span>, <span class="string">'this'</span>]</span><br><span class="line"></span><br><span class="line">print(<span class="string">'每个单词的 ID:'</span>, tfidf_vec.vocabulary_)</span><br><span class="line">每个单词的 ID: &#123;<span class="string">'this'</span>: <span class="number">8</span>, <span class="string">'is'</span>: <span class="number">3</span>, <span class="string">'the'</span>: <span class="number">6</span>, <span class="string">'bayes'</span>: <span class="number">1</span>, <span class="string">'document'</span>: <span class="number">2</span>, <span class="string">'second'</span>: <span class="number">5</span>, <span class="string">'and'</span>: <span class="number">0</span>, <span class="string">'third'</span>: <span class="number">7</span>, <span class="string">'one'</span>: <span class="number">4</span>&#125;</span><br><span class="line"></span><br><span class="line">print(<span class="string">'每个单词的 tfidf 值:'</span>, tfidf_matrix.toarray())</span><br><span class="line">每个单词的 tfidf 值: [[<span class="number">0.</span>         <span class="number">0.63314609</span> <span class="number">0.40412895</span> <span class="number">0.40412895</span> <span class="number">0.</span>         <span class="number">0.</span></span><br><span class="line">  <span class="number">0.33040189</span> <span class="number">0.</span>         <span class="number">0.40412895</span>]</span><br><span class="line"> [<span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.27230147</span> <span class="number">0.27230147</span> <span class="number">0.</span>         <span class="number">0.85322574</span></span><br><span class="line">  <span class="number">0.22262429</span> <span class="number">0.</span>         <span class="number">0.27230147</span>]</span><br><span class="line"> [<span class="number">0.55280532</span> <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.55280532</span> <span class="number">0.</span></span><br><span class="line">  <span class="number">0.28847675</span> <span class="number">0.55280532</span> <span class="number">0.</span>        ]</span><br><span class="line"> [<span class="number">0.</span>         <span class="number">0.</span>         <span class="number">0.52210862</span> <span class="number">0.52210862</span> <span class="number">0.</span>         <span class="number">0.</span></span><br><span class="line">  <span class="number">0.42685801</span> <span class="number">0.</span>         <span class="number">0.52210862</span>]]</span><br></pre></td></tr></table></figure>
+<h3 id="文档分类"><a href="#文档分类" class="headerlink" title="文档分类"></a>文档分类</h3><p>文档分类有两个重要阶段：</p>
+<ol>
+<li>基于分词的数据准备，包括分词、单词权重计算、去掉停用词；</li>
+<li>应用朴素贝叶斯分类，首先通过训练集得到分类器，然后应用于测试集，最终评估。</li>
+</ol>
+<h4 id="对文档进行分词"><a href="#对文档进行分词" class="headerlink" title="对文档进行分词"></a>对文档进行分词</h4><p>英文文档常用 NTLK 包进行分词：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line">word_list = nltk.word_tokenize(text) <span class="comment"># 分词</span></span><br><span class="line">nltk.pos_tag(word_list) <span class="comment"># 标注单词的词性</span></span><br></pre></td></tr></table></figure>
+<p>中文文档则使用 jieba 包：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line">word_list = jieba.cut (text) <span class="comment"># 中文分词</span></span><br></pre></td></tr></table></figure>
+<h4 id="加载停用词表"><a href="#加载停用词表" class="headerlink" title="加载停用词表"></a>加载停用词表</h4><p>可以从网上找到常用的停用词保存在 stop_words.txt，然后利用 python 读取文件，保存在 stop_words 数组中：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stop_words = [line.strip().decode(<span class="string">'utf-8'</span>) <span class="keyword">for</span> line <span class="keyword">in</span> io.open(<span class="string">'stop_words.txt'</span>).readlines()]</span><br></pre></td></tr></table></figure>
+<h4 id="计算单词的权重"><a href="#计算单词的权重" class="headerlink" title="计算单词的权重"></a>计算单词的权重</h4><p>也就是计算 TF-IDF 值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tf = TfidfVectorizer(stop_words=stop_words, max_df=<span class="number">0.5</span>)</span><br><span class="line">features = tf.fit_transform(train_contents)</span><br></pre></td></tr></table></figure>
+<p>这里 max_df 参数用来描述单词在文档中的最高出现率，假设为0.5，代表单词在50%的文档中出现过，那么它只携带了非常少的信息，因此不用于分词统计。</p>
+<h4 id="生成朴素贝叶斯分类器"><a href="#生成朴素贝叶斯分类器" class="headerlink" title="生成朴素贝叶斯分类器"></a>生成朴素贝叶斯分类器</h4><p>这里采用多项式贝叶斯分类器，其中 alpha 为平滑参数，之所以需要平滑，是因为如果一个单词在训练样本中没有出现，这个单词的概率会被计算为0，但训练集数据只是整体的一部分，不能因为在训练集中没有观察到就认为整个事件的概率为0，因此需要平滑处理。<br>当 alpha=1 时，使用的是 Laplace 平滑，采用加1的方式，来统计没有出现过的单词，这样当训练样本很大时，加1带来的影响可以忽略不计，同时避免了零概率的问题。<br>当 alpha=(0,1)时，使用的是 Lidstone 平滑，alpha越小，迭代次数越多，精度越高，比如可以设置为0.001。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多项式贝叶斯分类器</span></span><br><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> MultinomialNB  </span><br><span class="line">clf = MultinomialNB(alpha=<span class="number">0.001</span>).fit(train_features, train_labels)</span><br></pre></td></tr></table></figure>
+<h4 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h4><p>首先需要得到测试集的特征矩阵：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_tf = TfidfVectorizer(stop_words=stop_words, max_df=<span class="number">0.5</span>, vocabulary=train_vocabulary)</span><br><span class="line">test_features=test_tf.fit_transform(test_contents)</span><br></pre></td></tr></table></figure>
+<p>之后使用训练好的分类器对测试集做预测：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">predicted_labels=clf.predict(test_features)</span><br></pre></td></tr></table></figure>
+<h4 id="计算准确率"><a href="#计算准确率" class="headerlink" title="计算准确率"></a>计算准确率</h4><p>可以使用 sklearn 中的 metrics 包：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br><span class="line"><span class="keyword">print</span> metrics.accuracy_score(test_labels, predicted_labels)</span><br></pre></td></tr></table></figure>
 
       
 
@@ -229,15 +285,19 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">决策树</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CART</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">scikit-learn</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">朴素贝叶斯</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文档分类</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">jieba</a>
         		</li>
       		
 		</ul>
@@ -293,7 +353,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/04/10/数据分析笔记：决策树-二/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://gongls.me/2019/04/11/数据分析笔记：朴素贝叶斯/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -307,18 +367,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/04/11/数据分析笔记：朴素贝叶斯/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据分析笔记：朴素贝叶斯
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/04/10/数据分析笔记：信用卡欺诈分类/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据分析笔记：信用卡欺诈分类</div>
+    <a href="/2019/04/10/数据分析笔记：决策树-二/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据分析笔记：决策树(二)</div>
       <i class="icon-circle-right"></i>
     </a>
   
