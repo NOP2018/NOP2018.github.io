@@ -16,14 +16,15 @@
 <meta property="og:site_name" content="Gongls">
 <meta property="og:description" content="SVM 全称为 Support Vector Machine，支持向量机。它是一种常用的分类方法，在机器学习中 SVM 是有监督的学习模型(supervised learning)。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="//gongls.me/images/svm0.png">
 <meta property="og:image" content="//gongls.me/images/svm1.jpg">
 <meta property="og:image" content="//gongls.me/images/svm2.png">
 <meta property="og:image" content="//gongls.me/images/svm3.png">
-<meta property="og:updated_time" content="2019-04-17T02:55:06.050Z">
+<meta property="og:updated_time" content="2019-04-17T06:47:05.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据分析笔记：SVM">
 <meta name="twitter:description" content="SVM 全称为 Support Vector Machine，支持向量机。它是一种常用的分类方法，在机器学习中 SVM 是有监督的学习模型(supervised learning)。">
-<meta name="twitter:image" content="//gongls.me/images/svm1.jpg">
+<meta name="twitter:image" content="//gongls.me/images/svm0.png">
   
     <link rel="alternative" href="/atom.xml" title="Gongls" type="application/atom+xml">
   
@@ -179,8 +180,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>SVM 全称为 Support Vector Machine，支持向量机。它是一种常用的分类方法，在机器学习中 SVM 是有监督的学习模型(supervised learning)。<br><a id="more"></a></p>
-<h2 id="SVM-工作原理"><a href="#SVM-工作原理" class="headerlink" title="SVM 工作原理"></a>SVM 工作原理</h2><p>SVM 计算的是寻找一个超平面将样本分类的过程，这个超平面就是 SVM 分类器。<br>如下图所示的三条直线，哪种菜是更好的划分？<br><img src="/images/svm1.jpg" alt><br>在真实环境中，样本点的数量如果更多，蓝点可能被划分到 B 的右侧，被判断为红点，A 同理。相比之下， C 的划分更优，鲁棒性更强。<br>如何得出 C 的答案？这里需要引入<strong>分类间隔</strong>这个概念。<br>在保证决策面不变且不产生分类错误的情况，可以移动决策面 C ，知道产生两个极限位置，如图中的 A,B。极限的位置是指如果越过这个位置，就会产生分类错误。这里极限位置到最优决策面 C 的距离就是<strong>分类间隔</strong>，英文为<strong>margin</strong>。<br>如果转动这个最优决策面，可能会产生多个最优决策面，这些面的分类间隔可能是不同的，拥有最大间隔（max margin）的决策面就是 SVM 要找的最优解。</p>
+        <p><img src="/images/svm0.png" alt><br>SVM 全称为 Support Vector Machine，支持向量机。它是一种常用的分类方法，在机器学习中 SVM 是有监督的学习模型(supervised learning)。<br><a id="more"></a></p>
+<h2 id="SVM-工作原理"><a href="#SVM-工作原理" class="headerlink" title="SVM 工作原理"></a>SVM 工作原理</h2><p>SVM 计算的是寻找一个超平面将样本分类的过程，这个超平面就是 SVM 分类器。<br>如下图所示的三条直线，哪种才是更好的划分？<br><img src="/images/svm1.jpg" alt><br>在真实环境中，样本点的数量如果更多，蓝点可能被划分到 B 的右侧，被判断为红点，A 同理。相比之下， C 的划分更优，鲁棒性更强。<br>如何得出 C 的答案？这里需要引入<strong>分类间隔</strong>这个概念。<br>在保证决策面不变且不产生分类错误的情况，可以移动决策面 C ，知道产生两个极限位置，如图中的 A,B。极限的位置是指如果越过这个位置，就会产生分类错误。这里极限位置到最优决策面 C 的距离就是<strong>分类间隔</strong>，英文为<strong>margin</strong>。<br>如果转动这个最优决策面，可能会产生多个最优决策面，这些面的分类间隔可能是不同的，拥有最大间隔（max margin）的决策面就是 SVM 要找的最优解。</p>
 <h3 id="点到超平面的距离公式"><a href="#点到超平面的距离公式" class="headerlink" title="点到超平面的距离公式"></a>点到超平面的距离公式</h3><p>超平面的数学表达可以写成：<br><img src="/images/svm2.png" alt><br>其中 w、x 是 n 维空间里的向量，其中 x 是函数变量， w 是法向量。<br>SVM 就是帮我们找到一个超平面，在这个过程中，<strong>支持向量</strong>就是离分类超平面最近的样本点，实际上如果确定了支持向量也就确定了这个超平面，所以支持向量决定了分类间隔到底是多少，而在最大间隔以外的样本点其实对分类都没有意义。<br>用 di 代表 xi 到超平面 wxi+b=0 的欧氏距离，我们要求 di 的最小值，用它来代表这个样本到超平面的最短距离：<br><img src="/images/svm3.png" alt><br>其中||w||为超平面的范数（模）。</p>
 <h3 id="最大间隔的优化模型"><a href="#最大间隔的优化模型" class="headerlink" title="最大间隔的优化模型"></a>最大间隔的优化模型</h3><p>我们的目标就是找出所有分类间隔中最大的那个值对应的超平面，在数学上这是个凸优化问题（凸优化就是关于求凸集中的凸函数最小化的问题，具体参考凸优化的资料）。</p>
 <h3 id="硬间隔、软间隔和非线性SVM"><a href="#硬间隔、软间隔和非线性SVM" class="headerlink" title="硬间隔、软间隔和非线性SVM"></a>硬间隔、软间隔和非线性SVM</h3><p>硬间隔指的是完全分类正确，不能存在分类错误的情况，软间隔则是允许一定量的样本分类错误。<br>实际数据中，硬间隔、线性可分是理想状况，通常使用到的是软间隔 SVM。<br>另外存在非线性的数据，需要用到非线性 SVM，并且需要引入一个新概念：<strong>核函数</strong>，它可以将样本从原始空间映射到一个更高维的特质空间中，使得样本在新的空间中线性可分。<br>SVM 中最常用的核函数有线性核、多项式核、高斯核、拉普拉斯核以及 sigmoid 核，或者是这个核函数的组合。</p>
@@ -320,6 +321,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/04/17/数据分析：KNN/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          数据分析笔记：KNN
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/04/11/数据分析笔记：朴素贝叶斯/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">数据分析笔记：朴素贝叶斯</div>
@@ -452,7 +462,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">决策树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">随机森林</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">信用卡违约</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -472,6 +498,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CART</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">手写数字识别</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据清洗</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据采集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">逻辑回归</a>
               </li>
              
@@ -488,23 +530,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">随机森林</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">KNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">信用卡违约</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">决策树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CART</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据变换</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,18 +543,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">seaborn</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据清洗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据采集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据变换</a>
               </li>
              
               <li class="article-tag-list-item">
